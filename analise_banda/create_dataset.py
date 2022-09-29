@@ -21,11 +21,11 @@ def artist_albums(artist_id):
     global spotify
     results = spotify.artist_albums(artist_id, album_type='album')
     albums = results['items']
+    
     while results['next']:
         results = spotify.next(results)
         albums.extend(results['items'])
     return albums
-
 def artist_musics(artist_id):
     """Cria um data frame com informaçoes sobre todas as músicas do artista
 
@@ -43,7 +43,8 @@ def artist_musics(artist_id):
     todos_tempos = list()
     todas_exibicoes = list()
     todas_letras = list()
-
+    popularidade = list()
+    explicita = list()
     url = "https://www.letras.mus.br/ac-dc/"
 
     for album in albums:
@@ -61,13 +62,16 @@ def artist_musics(artist_id):
                 music += " ".join(verse.stripped_strings)
                 music += " "
             todas_letras.append(music)
-
             todas_musicas.append(cada['name'])
             todos_albuns.append(album['name'])
             todos_tempos.append(cada['duration_ms'])
-        
+            
+            #algumas informações não ficam disponível em .albumstrack, portanto temos que recorrer ao .treck para conseguir todas as informações necessárias
+            track = spotify.track('spotify:track:'+ cada['id'])
+            popularidade.append(track['popularity'])
+            explicita.append(track['explicit'])
     index = pd.MultiIndex.from_tuples(list(zip(*[todos_albuns,todas_musicas])), names=["Álbum", "Música"])
-    musica = {"Duração":todos_tempos, "Letras":todas_letras, "Exibições":todas_exibicoes}
+    musica = {"Duração":todos_tempos, "Letras":todas_letras, "Exibições":todas_exibicoes, 'Popularidade': popularidade, 'Explícita': explicita}
     return pd.DataFrame(musica, index= index)
-
-print(artist_musics('spotify:artist:711MCceyCBcFnzjGY4Q7Un'))
+# print(artist_musics('spotify:artist:711MCceyCBcFnzjGY4Q7Un'))
+# artist_musics('spotify:artist:711MCceyCBcFnzjGY4Q7Un').to_csv('ac-dc_musicas.csv', encoding='utf-8')
