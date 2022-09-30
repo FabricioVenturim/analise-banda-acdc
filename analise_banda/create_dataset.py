@@ -12,14 +12,14 @@ import pandas as pd
 # spotify stores Spotify's API client credentials
 spotify = sp.Spotify(client_credentials_manager=SpotifyClientCredentials("7e81a5d9c8cc48d8ad1891c5774dd6a6", "da0cee2b1eb74750b08a50ba2f54af1d"))
 
-def artist_albums(artist_id):
-    """Consulta a API do Spotify para todos os álbuns do artista escolhido
+def artist_albums(artist_id: str) -> dict:
+    """
+    Consulta a API do Spotify para todos os álbuns do artista escolhido
 
-    Args:
-        artist_id (str): ID de artistas da API do Spotify
-
-    Returns:
-        dict: retorna um dicionário com informações de todos os álbuns de um artista
+    :param artist_id: ID de artistas da API do Spotify
+    :type artist_id: str
+    :return: retorna um dicionário com informações de todos os álbuns de um artista
+    :rtype: dict
     """    
     global spotify
     results = spotify.artist_albums(artist_id, album_type='album')
@@ -31,15 +31,15 @@ def artist_albums(artist_id):
     return albums
 
 
-def artist_musics(artist_id):
-    """Cria um data frame com informaçoes sobre todas as músicas do artista
+def artist_musics(artist_id: str) -> pd.DataFrame:
+    """
+    Cria um data frame com informaçoes sobre todas as músicas do artista
 
-    Args:
-        artist_id (str): id do artista na API do Spotify
-
-    Returns:
-        DataFrame: retorna um DataFrame com vários álbums, cada album com várias músicas e cada música contém duração em ms, letra, e exibições
-    """    
+    :param artist_id: id do artista na API do Spotify
+    :type artist_id: str
+    :return: retorna um DataFrame com vários álbums, cada album com várias músicas e cada música contém duração em ms, letra, e exibições
+    :rtype: pd.DataFrame
+    """      
     global spotify
     albums = (artist_albums(artist_id))
     
@@ -69,15 +69,15 @@ def artist_musics(artist_id):
                                 ### FUNÇÕES DO SCRAPING LENTRAS ###
                                 ###################################
 
-def get_links(band):
-    """Cria um dataframe com as letras e exibições do site Letras.com.br
+def get_links(band: str) -> dict:
+    """
+    Cria um dataframe com as letras e exibições do site Letras.com.br
 
-    Args:
-        band (str): nome da banda que se deseja o dataframe
-
-    Returns:
-        dict: dicionário com os nomes das músicas, letras e exibições
-    """    
+    :param band: nome da banda que se deseja o dataframe
+    :type band: str
+    :return: dicionário com os nomes das músicas, letras e exibições
+    :rtype: dict
+    """       
     try:
         titulo = dict()
         letra = dict()
@@ -101,15 +101,15 @@ def get_links(band):
         print(f"Ocorreu algum erro ao tentar acessar o site da banda. {erro}")
 
 
-def get_music(new_page):
-    """Função para pegar as letras das músicas do site letras
+def get_music(new_page: str) -> str:
+    """
+    Função para pegar as letras das músicas do site letras
 
-    Args:
-        new_page (str): link do site da letra que se deseja pegar a letra
-
-    Returns:
-        str: string com a letra da música
-    """    
+    :param new_page: link do site da letra que se deseja pegar a letra
+    :type new_page: str
+    :return: string com a letra da música
+    :rtype: str
+    """       
     try:
         music = ""
         html = urlopen(f"https://www.letras.mus.br/{new_page}") #Formata a url
@@ -122,15 +122,15 @@ def get_music(new_page):
     except Exception as erro:
         print(f"Ocorreu algum erro ao tentar acessar o site da música. {erro}")
 
-def get_popularity(new_page):
-    """Função para pegar as exibições da música do site letra
+def get_popularity(new_page: str) -> int:
+    """
+    Função para pegar as exibições da música do site letra
 
-    Args:
-        new_page (str): link da música que se deseja pegar as exibições
-
-    Returns:
-        int: número de exibições que aquela música teve no site letras
-    """    
+    :param new_page: link da música que se deseja pegar as exibições
+    :type new_page: str
+    :return: número de exibições que aquela música teve no site letras
+    :rtype: int
+    """       
     try:
         html = urlopen(f"https://www.letras.mus.br/{new_page}")
         bs = BeautifulSoup(html, "html.parser")
@@ -141,15 +141,16 @@ def get_popularity(new_page):
     except Exception as erro:
         print(f"Ocorreu algum erro ao tentar acessar o site da música. {erro}") 
 
-def create_dataset_letras(band):
-    """Função responsável por criar um dataframe com os nomes das músicas, letras e exibições do site letras.com.br. 
+def create_dataset_letras(band: str) -> pd.DataFrame:
+    """
+    Função responsável por criar um dataframe com os nomes das músicas, letras e exibições do site letras.com.br. 
 
-    Args:
-        band (str): nome da banda que se deseja ter um dataframe
-
-    Returns:
-        dataframe: dataframe com os nomes das músicas, letras e exibições 
-    """    
+    :param band: nome da banda que se deseja ter um dataframe
+    :type band: str
+    :return: dataframe com os nomes das músicas, letras e exibições 
+    :rtype: pd.DataFrame
+    """ 
+          
     musicas = get_links(band)
     df_musicas = pd.DataFrame(musicas)
     return df_musicas
@@ -159,16 +160,16 @@ def create_dataset_letras(band):
                             ### FUNÇÕES PARA JUNTAR OS DATASET ###
                             ######################################
 
-def join_dataset(spotify, nome_letras):
+def join_dataset(spotify: str, nome_letras: str):
     """Função para juntar o dataframe da API do spotify e o dataframe do scraping do site letras.com.br
 
-    Args:
-        spotify (str): ID de artistas da API do Spotify
-        nome_letras (str):  nome da banda que se deseja o dataframe
-
-    Returns:
-        .csv: um arquivo csv com a junção dos dois dataframe
-    """    
+    :param spotify: ID de artistas da API do Spotify
+    :type spotify: str
+    :param nome_letras: nome da banda que se deseja o dataframe
+    :type nome_letras: str
+    :return: um arquivo csv com a junção dos dois dataframe
+    :rtype: csv
+    """     
     #df do spotify
     albuns = artist_musics(spotify)
 
@@ -197,4 +198,4 @@ def join_dataset(spotify, nome_letras):
 
 
 #PARA ATUALIZAR O CSV
-join_dataset("spotify:artist:711MCceyCBcFnzjGY4Q7Un","ac-dc")
+# join_dataset("spotify:artist:711MCceyCBcFnzjGY4Q7Un","ac-dc")
