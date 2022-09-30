@@ -79,3 +79,21 @@ def popularidade_geral(df):
 
 # print(popularidade_geral(df_musics))
 
+def tamanho_musica_geral(df):
+    maior = []
+    tamanho_maior = []
+    menor = []
+    tamanho_menor = []
+
+    index_max = df["Duração"].idxmax()
+    maior.append(df["Música"].iloc[index_max])
+    tamanho_maior.append(df["Duração"].iloc[index_max])
+        
+    index_min = df["Duração"].idxmin()
+    menor.append(df["Música"].iloc[index_min])
+    tamanho_menor.append(df["Duração"].iloc[index_min])
+
+    tamanhos = {"Música Maior":maior, "Tamanho Maior":tamanho_maior, "Música Menor":menor, "Tamanho Menor": tamanho_menor}
+    return tamanhos
+
+# print(tamanho_musica_geral(df_musics))
