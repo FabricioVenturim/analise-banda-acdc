@@ -63,3 +63,19 @@ def tamanho_musica_album(df):
     return tamanhos
 
 # print(tamanho_musica_album(df_musics))
+
+def popularidade_geral(df):
+    mais_popular = []
+    menos_popular = []
+
+    index_max = df["Popularidade"].idxmax()
+    mais_popular.append(df["Música"].iloc[index_max])
+        
+    index_min = df["Popularidade"].idxmin()
+    menos_popular.append(df["Música"].iloc[index_min])
+
+    popularidade = {"Música Mais Popular":mais_popular, "Música Menos Popular":menos_popular}
+    return popularidade
+
+# print(popularidade_geral(df_musics))
+
