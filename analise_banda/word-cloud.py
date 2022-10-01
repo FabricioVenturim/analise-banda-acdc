@@ -19,6 +19,7 @@ def cloud_letras():
     mask = np.array(Image.open("logo_ACDC.png"))
     cloud = WordCloud(width=1920,height=1080,
                     background_color="black",
+                    contour_color='gold',
                     contour_width=3,
                     mask=mask,max_words=1000)
     cloud.generate_from_frequencies(ea.contar_palavras(letras))
@@ -31,7 +32,7 @@ def cloud_titulo_musicas():
     global musicas
     letras = np.unique(musicas['Letra'])
     letras = ' '.join(letras)
-    titulos = np.unique(musicas['Música'])
+    titulos = np.unique(musicas['Álbum'])
     titulos = ' '.join(titulos)
     mask = np.array(Image.open("logo_ACDC.png"))
     cloud = WordCloud(width=1920,height=1080,

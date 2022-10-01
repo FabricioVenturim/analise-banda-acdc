@@ -12,10 +12,14 @@ def separar_palavras_texto(texto: str) -> list[str]:
     """
     
     print(texto)    
-    palavras = re.findall('[\'\w]{3,}',texto, flags=re.IGNORECASE)
+    palavras = re.findall('\w{3,}',texto, flags=re.IGNORECASE)
     i=0
-    for i in range(len(palavras)):
+    while i < len(palavras):
         palavras[i] = palavras[i].lower()
+        if palavras[i] in palavras_banidas:
+            palavras.pop(i)
+        else:
+            i+=1
     return palavras
 
 def separar_palavras_lista(lista_texto: list[str]) -> list[str] :    
@@ -44,7 +48,7 @@ def contar_palavras(lista_texto: list[str]) -> dict :
     
     return palavras.value_counts().to_dict()
 
-def frequencia_titulo(titulo: str, texto: str) -> dict:
+def frequencia_titulo(titulo: str, texto: str) -> dict[str, int]:
     """conta a frequencia de palavras do titulo dentro do texto
 
     :param titulo: string com palavras a serem pesquisadsas no texto
@@ -53,7 +57,7 @@ def frequencia_titulo(titulo: str, texto: str) -> dict:
     :type texto: str
     :return: dicionario onde a chave são as palavras do título e os items são as
     frequências
-    :rtype: dict
+    :rtype: dict[str, int]
     """    
     palavras_titulo = separar_palavras_texto(titulo)
     frequencia = dict()
