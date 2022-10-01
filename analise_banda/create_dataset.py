@@ -37,7 +37,10 @@ def artist_musics(artist_id: str) -> pd.DataFrame:
 
     :param artist_id: id do artista na API do Spotify
     :type artist_id: str
-    :return: retorna um DataFrame com vários álbums, cada album com várias músicas e cada música contém duração em ms, letra, e exibições
+    :return: retorna um DataFrame com vários álbums, cada album com várias músicas
+    e cada música contém duração em ms, letra, popularidade, se é explicita ou não,
+    dançabilidade, exibições, energia, volume,  "speechiness", acústica,
+    instrumentalidade, vivacidade, valência e tempo
     :rtype: pd.DataFrame
     """      
     global spotify
@@ -48,7 +51,15 @@ def artist_musics(artist_id: str) -> pd.DataFrame:
     todos_tempos = list()
     popularidade = list()
     explicita = list()
-
+    dancabilidade = list()
+    energia = list()
+    volume = list()
+    speechiness = list()
+    acustica = list()
+    instrumentalidade = list()
+    vivacidade = list()
+    valencia = list()
+    tempo = list()
     for album in albums:
         musics = spotify.album_tracks('spotify:album:'+ album['id'])
         #Adicona as informações nas respectivas listas
@@ -57,12 +68,30 @@ def artist_musics(artist_id: str) -> pd.DataFrame:
             todos_albuns.append(album['name'])
             todos_tempos.append(cada['duration_ms'])
             
-            #algumas informações não ficam disponível em .albumstrack, portanto temos que recorrer ao .treck para conseguir todas as informações necessárias
+            #algumas informações não ficam disponível em .albumstrack,
+            # portanto temos que recorrer ao .track para conseguir todas as informações necessárias
             track = spotify.track('spotify:track:'+ cada['id'])
             popularidade.append(track['popularity'])
             explicita.append(track['explicit'])
+            track = spotify.audio_features('spotify:track:'+ cada['id'])
+            dancabilidade.append(track[0]['danceability'])
+            energia.append(track[0]['energy'])
+            volume.append(track[0]['loudness'])
+            speechiness.append(track[0]['speechiness'])
+            acustica.append(track[0]['acousticness'])
+            instrumentalidade.append(track[0]['instrumentalness'])
+            vivacidade.append(track[0]['liveness'])
+            valencia.append(track[0]['valence'])
+            tempo.append(track[0]['tempo'])
+            
     
-    musica = {"Álbum": todos_albuns, "Música": todas_musicas, "Duração":todos_tempos,'Popularidade': popularidade, 'Explícita': explicita}
+    musica = {"Álbum": todos_albuns, "Música": todas_musicas,
+              "Duração":todos_tempos,'Popularidade': popularidade,
+              'Explícita': explicita, 'Dançabilidade': dancabilidade,
+              'Energia': energia, 'Volume': volume,
+              'Speechiness': speechiness, 'Acustica': acustica,
+              'Instrumentalidade': instrumentalidade, 'Vivacidade': vivacidade,
+              'Tempo': tempo}
     return pd.DataFrame(musica)
 
                                 ###################################
