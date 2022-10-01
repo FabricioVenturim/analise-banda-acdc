@@ -1,99 +1,151 @@
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt 
 
-df_musics = pd.read_csv("dataset_acdc.csv")
+################
+#### ITEM 1 ####
+################
+
+df_musicas = pd.read_csv("dataset_acdc.csv")    
 
 def popularidade_album(df):
     albums = df["Álbum"].unique()
-
-    mais_populares = []
-    menos_populares = []
-    lista_albums = []
-    valores_mais_ouvidas = []
-    valores_menos_ouvidas = []
+    
+    lista_albuns = [] 
+    musicas = []
+    valores = []
+    popularidade = []
 
     for album in albums:
         musics_album = df.loc[df["Álbum"] == album]
-
-        index_max = musics_album["Popularidade"].idxmax()
-        mais_popular = df["Música"].iloc[index_max]
-        quantidade_exibicoes_max = df["Popularidade"].iloc[index_max]
-
-        index_min = musics_album["Popularidade"].idxmin()
-        menos_popular = df["Música"].iloc[index_min]
-        quantidade_exibicoes_min = df["Popularidade"].iloc[index_min]
-
-        mais_populares.append(mais_popular)
-        valores_mais_ouvidas.append(quantidade_exibicoes_max)
-        menos_populares.append(menos_popular)
-        valores_menos_ouvidas.append(quantidade_exibicoes_min)
-        lista_albums.append(album)
-
-    popularidade = {"Álbum": lista_albums, "Mais Popular": mais_populares, "Valor Mais Popular": valores_mais_ouvidas, "Menos Populares": menos_populares, "Valor Menos Popular": valores_menos_ouvidas}
-    return popularidade
+        musics_album = musics_album.sort_values(by="Popularidade", ascending=False)
         
-# print(popularidade_album(df_musics))
+        #Mais popular
+        mais_popular = musics_album["Música"].head(n=3)
+        quantidade_exibicoes_max = musics_album["Popularidade"].head(n=3)
+        for musica, quantidade in zip(mais_popular,quantidade_exibicoes_max):
+            lista_albuns.append(album)
+            musicas.append(musica)
+            valores.append(quantidade)
+            popularidade.append("Mais Popular")
+        
+        #Menos popular
+        menos_popular = musics_album["Música"].tail(n=3)
+        quantidade_exibicoes_min = musics_album["Popularidade"].tail(n=3)
+        for musica,quantidade in zip(menos_popular, quantidade_exibicoes_min):
+            lista_albuns.append(album)
+            musicas.append(musica)
+            valores.append(quantidade)
+            popularidade.append("Menos Popular")
+    popularidade = {"Álbum": lista_albuns ,"Música": musicas, "Popularidade": valores, "Tipo Popularidade": popularidade}
+    return popularidade
+
+
+
+################
+#### ITEM 2 ####
+################
 
 def tamanho_musica_album(df):
     albums = df["Álbum"].unique()
 
-    nomes_maiores = []
-    nomes_menores = []
-    lista_albums = []
-    valores_maiores = []
-    valores_menores = []
-
+    lista_albuns = []
+    musicas = []
+    duracoes = []
+    tipo_duracao = []
+    
     for album in albums:
         musics_album = df.loc[df["Álbum"] == album]
+        musics_album = musics_album.sort_values(by="Duração", ascending=False)
+        
+        #Mais longa
+        musicas_mais_longas = musics_album["Música"].head(n=3)
+        duracoes_max = musics_album["Duração"].head(n=3)
+        for musica, duracao in zip(musicas_mais_longas, duracoes_max):
+            lista_albuns.append(album)
+            musicas.append(musica)
+            duracoes.append(duracao)
+            tipo_duracao.append("Mais Longas")
 
-        index_max = musics_album["Duração"].idxmax()
-        maior = df["Música"].iloc[index_max]
-        tamanho_maior = df["Duração"].iloc[index_max]
+        #Mais curta
+        musicas_mais_curta = musics_album["Música"].tail(n=3)
+        duracoes_min = musics_album["Duração"].tail(n=3)
+        for musica, duracao in zip(musicas_mais_curta, duracoes_min):
+            lista_albuns.append(album)
+            musicas.append(musica)
+            duracoes.append(duracao)
+            tipo_duracao.append("Mais Curtas")
 
-        index_min = musics_album["Duração"].idxmin()
-        menor = df["Música"].iloc[index_min]
-        tamanho_menor = df["Duração"].iloc[index_min]
-
-        nomes_maiores.append(maior)
-        valores_maiores.append(tamanho_maior)
-        nomes_menores.append(menor)
-        valores_menores.append(tamanho_menor)
-        lista_albums.append(album)
-
-    tamanhos = {"Álbum": lista_albums, "Música Maior": nomes_maiores, "Tamanho Maior": valores_maiores, "Música Menor": nomes_menores, "Tamanho Menor": valores_menores}
+    tamanhos = {"Álbum": lista_albuns, "Música": musicas, "Duraçao": duracoes, "Tipo Duração": tipo_duracao}
     return tamanhos
 
-# print(tamanho_musica_album(df_musics))
+################
+#### ITEM 3 ####
+################
 
 def popularidade_geral(df):
-    mais_popular = []
-    menos_popular = []
+    musicas = []
+    popularidade = []
+    tipo_popularidade = []
+    
+    musicas_gerais = df.sort_values(by="Popularidade", ascending=False)
+    
+    #Mais popular
+    mais_popular = musicas_gerais["Música"].head(n=3)
+    quantidade_popularidade_max = musicas_gerais["Popularidade"].head(n=3)
+    for musica, quantidade in zip(mais_popular,quantidade_popularidade_max):
+        musicas.append(musica)
+        popularidade.append(quantidade)
+        tipo_popularidade.append("Mais Populares")
+    
+    #Menos popular
+    menos_popular = musicas_gerais["Música"].tail(n=3)
+    quantidade_popularidade_min = musicas_gerais["Popularidade"].tail(n=3)
+    for musica, quantidade in zip(menos_popular, quantidade_popularidade_min):
+        musicas.append(musica)
+        popularidade.append(quantidade)
+        tipo_popularidade.append("Menos Populares")
 
-    index_max = df["Popularidade"].idxmax()
-    mais_popular.append(df["Música"].iloc[index_max])
-        
-    index_min = df["Popularidade"].idxmin()
-    menos_popular.append(df["Música"].iloc[index_min])
+    popularidade_geral = {"Música": musicas, "Popularidade": popularidade, "Tipo Popularidade": tipo_popularidade}
+    return popularidade_geral
 
-    popularidade = {"Música Mais Popular":mais_popular, "Música Menos Popular":menos_popular}
-    return popularidade
-
-# print(popularidade_geral(df_musics))
+################
+#### ITEM 4 ####
+################
 
 def tamanho_musica_geral(df):
-    maior = []
-    tamanho_maior = []
-    menor = []
-    tamanho_menor = []
+    musicas = []
+    duracoes = []
+    tipo_duracao = []
+    
+    musicas_gerais = df.sort_values(by="Duração", ascending=False)
+    
+    #Mais longa
+    musicas_mais_longas = musicas_gerais["Música"].head(n=3)
+    duracoes_mais_longas = musicas_gerais["Duração"].head(n=3)
+    for musica, duracao in zip(musicas_mais_longas,duracoes_mais_longas):
+        musicas.append(musica)
+        duracoes.append(duracao)
+        tipo_duracao.append("Mais Longas")
+    
+    #Mais curta
+    menos_popular = musicas_gerais["Música"].tail(n=3)
+    quantidade_popularidade_min = musicas_gerais["Duração"].tail(n=3)
+    for musica, duracao in zip(menos_popular, quantidade_popularidade_min):
+        musicas.append(musica)
+        duracoes.append(duracao)
+        tipo_duracao.append("Mais curtas")
 
-    index_max = df["Duração"].idxmax()
-    maior.append(df["Música"].iloc[index_max])
-    tamanho_maior.append(df["Duração"].iloc[index_max])
-        
-    index_min = df["Duração"].idxmin()
-    menor.append(df["Música"].iloc[index_min])
-    tamanho_menor.append(df["Duração"].iloc[index_min])
+    popularidade_geral = {"Música": musicas, "Duraçao": duracoes, "Tipo Duração": tipo_duracao}
+    return popularidade_geral
 
-    tamanhos = {"Música Maior":maior, "Tamanho Maior":tamanho_maior, "Música Menor":menor, "Tamanho Menor": tamanho_menor}
-    return tamanhos
 
-# print(tamanho_musica_geral(df_musics))
+################
+#### ITEM 6 ####
+################
+
+def relacao_duracao_popularidade(df):
+    df_new = df[["Popularidade", "Duração"]]
+    corr_df = df_new.corr(method="pearson")
+    return corr_df
+
