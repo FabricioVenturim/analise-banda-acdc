@@ -1,9 +1,15 @@
 import pandas as pd
 import numpy as np
 import re
-from wordcloud import WordCloud
 import matplotlib.pyplot as plt
-def separar_palavras(lista_texto: list[str]) -> list[str] :
+
+def separar_palavras_texto(texto: str) -> list[str]:
+    palavras = re.findall('[\'\w]+',texto, flags=re.IGNORECASE)
+    for i in range(len(palavras)):
+        palavras[i] = palavras[i].lower()
+    return palavras
+def separar_palavras_lista(lista_texto: list[str]
+                           ) -> list[str] :    
     """Recebe uma lista de strings, e as separa em palavras
 
     :param lista_texto: lista de textos
@@ -26,6 +32,6 @@ def contar_palavras(lista_texto: list[str]) -> pd.Series :
     :return: serie com as palavras e sua contagem 
     :rtype: pd.Series
     """    
-    palavras = pd.Series(separar_palavras(lista_texto))
+    palavras = pd.Series(separar_palavras_lista(lista_texto))
     
     return palavras.value_counts().to_dict()
