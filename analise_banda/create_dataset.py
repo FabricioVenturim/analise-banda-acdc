@@ -193,9 +193,10 @@ def join_dataset(spotify: str, nome_letras: str):
             if titulo_site_letras in titulo_spotify: #Compara com as letras do spotify
                 albuns["Letra"][index] = letras.loc[index_letra]["letra"]
                 albuns["Exibicoes"][index] = letras.loc[index_letra]["popularidade"]
+                albuns["Música"][index] = titulo
         index_letra += 1
     return albuns.to_csv("dataset_acdc.csv", index = False)
 
 
 #PARA ATUALIZAR O CSV
-# join_dataset("spotify:artist:711MCceyCBcFnzjGY4Q7Un","ac-dc")
+join_dataset("spotify:artist:711MCceyCBcFnzjGY4Q7Un","ac-dc")
