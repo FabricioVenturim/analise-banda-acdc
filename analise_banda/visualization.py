@@ -2,41 +2,8 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-df_musicas = pd.read_csv("dataset_acdc.csv")    
-
-def popularidade_album(df):
-    albums = df["Álbum"].unique()
-    
-    lista_albuns = [] 
-    musicas = []
-    valores = []
-    popularidade = []
-
-    for album in albums:
-        musics_album = df.loc[df["Álbum"] == album]
-        musics_album = musics_album.sort_values(by="Popularidade", ascending=False)
-        
-        mais_popular = musics_album["Música"].head(n=3)
-        quantidade_exibicoes_max = musics_album["Popularidade"].head(n=3)
-        for musica, quantidade in zip(mais_popular,quantidade_exibicoes_max):
-            lista_albuns.append(album)
-            musicas.append(musica)
-            valores.append(quantidade)
-            popularidade.append("Mais Popular")
-
-        menos_popular = musics_album["Música"].tail(n=3)
-        quantidade_exibicoes_min = musics_album["Popularidade"].tail(n=3)
-        for musica,quantidade in zip(menos_popular, quantidade_exibicoes_min):
-            lista_albuns.append(album)
-            musicas.append(musica)
-            valores.append(quantidade)
-            popularidade.append("Menos Popular")
-    popularidade = {"Álbum":lista_albuns ,"Música":musicas, "Popularidade": valores, "Tipo Popularidade": popularidade}
-    return popularidade
-
-teste = popularidade_album(df_musicas)
-
-def graficos(dicionario):
+def grafico_popularidade_album(dicionario):
+    #Transforma o dicionario em dataframe
     df_albuns = pd.DataFrame(dicionario)
     albuns = df_albuns["Álbum"].unique()
     graficos = list()
@@ -50,9 +17,10 @@ def graficos(dicionario):
         sns.barplot(data=musics_album, y="Música", x="Popularidade", ax=graf, hue = "Tipo Popularidade" )
         #adicionando título
         graf.set_title(f"Popularidade das Músicas do Álbum {album}", fontdict={'fontsize':15})
-        #mudando nome e tamanho do label x
+        #mudando nome e tamanho do label x e y
         graf.set_xlabel('Popularidade', fontdict={'fontsize':13})
         graf.set_ylabel("")
+        #formatando legenda 
         graf.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
 
         graficos.append(graf.get_figure())
@@ -60,5 +28,73 @@ def graficos(dicionario):
     
     return graficos
 
-graf = graficos(teste)
-graf[0].savefig("gr",  bbox_inches='tight')
+def grafico_duracao_album(dicionario):
+    #Transforma o dicionario em dataframe
+    df_albuns = pd.DataFrame(dicionario)
+    albuns = df_albuns["Álbum"].unique()
+    graficos = list()
+    
+    for album in albuns:
+        musics_album = df_albuns.loc[df_albuns["Álbum"] == album]
+        
+        #criando uma figure, axes, alterando tamanho
+        fig, graf = plt.subplots(figsize=(9,6))
+        #criando o gráfico de barras
+        sns.barplot(data=musics_album, y="Música", x="Duraçao", ax=graf, hue = "Tipo Duração" )
+        #adicionando título
+        graf.set_title(f"Duração das Músicas do Álbum {album}", fontdict={'fontsize':15})
+        #mudando nome e tamanho do label x e y
+        graf.set_xlabel('Duração (milissegundos)', fontdict={'fontsize':13})
+        graf.set_ylabel("")
+        #formatando legenda 
+        graf.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
+
+        graficos.append(graf.get_figure())
+        plt.close()
+    
+    return graficos
+
+def grafico_popularidade_geral(dicionario):
+    #Transforma o dicionario em dataframe
+    df_musicas = pd.DataFrame(dicionario)
+    graficos = list()
+
+    #criando uma figure, axes, alterando tamanho
+    fig, graf = plt.subplots(figsize=(9,6))
+    #criando o gráfico de barras
+    sns.barplot(data=df_musicas, y="Música", x="Popularidade", ax=graf, hue = "Tipo Popularidade" )
+    #adicionando título
+    graf.set_title("Popularidade das Músicas da banda AC/DC", fontdict={'fontsize':15})
+    #mudando nome e tamanho do label x e y
+    graf.set_xlabel('Popularidade', fontdict={'fontsize':13})
+    graf.set_ylabel("")
+    #formatando legenda 
+    graf.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
+
+    graficos.append(graf.get_figure())
+    plt.close()
+
+    return graficos
+
+def grafico_tamanho_musica_geral(dicionario):
+    #Transforma o dicionario em dataframe
+    df_musicas = pd.DataFrame(dicionario) 
+    df_musicas["Música"].mask((df_musicas["Música"]=="Let There Be Rock") & (df_musicas["Duraçao"]==736133), other = "Let There Be Rock (LIVE)" , inplace=True)    
+    graficos = list()
+
+    #criando uma figure, axes, alterando tamanho
+    fig, graf = plt.subplots(figsize=(9,6))
+    #criando o gráfico de barras
+    sns.barplot(data=df_musicas, y="Música", x="Duraçao", ax=graf, hue = "Tipo Duração" )
+    #adicionando título
+    graf.set_title("Duração das Músicas da banda AC/DC", fontdict={'fontsize':15})
+    #mudando nome e tamanho do label x e y
+    graf.set_xlabel('Popularidade', fontdict={'fontsize':13})
+    graf.set_ylabel("")
+    #formatando legenda 
+    graf.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
+
+    graficos.append(graf.get_figure())
+    plt.close()
+
+    return graficos
