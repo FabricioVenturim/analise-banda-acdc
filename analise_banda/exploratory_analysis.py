@@ -1,12 +1,11 @@
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt 
 
 ################
 #### ITEM 1 ####
 ################
 
 df_musicas = pd.read_csv("dataset_acdc.csv")    
+df_albums = pd.read_csv("premiacoes.csv")
 
 def popularidade_album(df):
     albums = df["Álbum"].unique()
@@ -38,7 +37,8 @@ def popularidade_album(df):
             valores.append(quantidade)
             popularidade.append("Menos Popular")
     popularidade = {"Álbum": lista_albuns ,"Música": musicas, "Popularidade": valores, "Tipo Popularidade": popularidade}
-    return popularidade
+    df_popularidade = pd.DataFrame(popularidade)
+    return df_popularidade
 
 
 
@@ -76,8 +76,9 @@ def tamanho_musica_album(df):
             duracoes.append(duracao)
             tipo_duracao.append("Mais Curtas")
 
-    tamanhos = {"Álbum": lista_albuns, "Música": musicas, "Duraçao": duracoes, "Tipo Duração": tipo_duracao}
-    return tamanhos
+    duracoes_gerais = {"Álbum": lista_albuns, "Música": musicas, "Duração": duracoes, "Tipo Duração": tipo_duracao}
+    df_duracoes = pd.DataFrame(duracoes_gerais)
+    return df_duracoes
 
 ################
 #### ITEM 3 ####
@@ -107,7 +108,9 @@ def popularidade_geral(df):
         tipo_popularidade.append("Menos Populares")
 
     popularidade_geral = {"Música": musicas, "Popularidade": popularidade, "Tipo Popularidade": tipo_popularidade}
-    return popularidade_geral
+    df_popularidade_geral = pd.DataFrame(popularidade_geral)
+    return df_popularidade_geral
+
 
 ################
 #### ITEM 4 ####
@@ -129,22 +132,54 @@ def tamanho_musica_geral(df):
         tipo_duracao.append("Mais Longas")
     
     #Mais curta
-    menos_popular = musicas_gerais["Música"].tail(n=3)
-    quantidade_popularidade_min = musicas_gerais["Duração"].tail(n=3)
-    for musica, duracao in zip(menos_popular, quantidade_popularidade_min):
+    musicas_menos_longas = musicas_gerais["Música"].tail(n=3)
+    duracoes_mais_curtas = musicas_gerais["Duração"].tail(n=3)
+    for musica, duracao in zip(musicas_menos_longas, duracoes_mais_curtas):
         musicas.append(musica)
         duracoes.append(duracao)
         tipo_duracao.append("Mais curtas")
 
-    popularidade_geral = {"Música": musicas, "Duraçao": duracoes, "Tipo Duração": tipo_duracao}
-    return popularidade_geral
+    duracoes_gerais = {"Música": musicas, "Duração": duracoes, "Tipo Duração": tipo_duracao}
+    df_duracoes_gerais = pd.DataFrame(duracoes_gerais)
+    return df_duracoes_gerais
 
+################
+#### ITEM 5 ####
+################
+
+def premiacoes_album(df):
+    albums = []
+    pratas = []
+    ouros = []
+    platinas = []
+    diamantes = []
+
+    albums_geral = df.sort_values(by = "Soma_peso", ascending = False)
+
+    # Informações álbuns mais premiados
+    albums_mais_premiados = albums_geral["Álbum"].head(n=3)
+    pratas_albums = albums_geral["Prata"].head(n=3)
+    ouros_albums = albums_geral["Ouro"].head(n=3)
+    platinas_albums = albums_geral["Platina"].head(n=3)
+    diamantes_albums = albums_geral["Diamante"].head(n=3)
+
+    for album, prata, ouro, platina, diamante in zip(albums_mais_premiados, pratas_albums, ouros_albums, platinas_albums, diamantes_albums):
+        albums.append(album)
+        pratas.append(prata)
+        ouros.append(ouro)
+        platinas.append(platina)
+        diamantes.append(diamante)
+
+    premiacoes_gerais = {"Álbum":albums, "Prata":pratas, "Ouro":ouros, "Platina":platinas, "Diamante":diamantes}
+    df_premiacoes_gerais = pd.DataFrame(premiacoes_gerais)
+    return df_premiacoes_gerais
 
 ################
 #### ITEM 6 ####
 ################
 
 def relacao_duracao_popularidade(df):
+    # Correlação entre a popularidade e a duração
     df_new = df[["Popularidade", "Duração"]]
     corr_df = df_new.corr(method="pearson")
     return corr_df
