@@ -100,7 +100,41 @@ def printar_segunda_questão(pdf):
             pdf.setFont("Vera", 12)
 
 def printar_terceira_questão(pdf):
-    pass
+    global margem
+    global linha
+    popularidade = exploratory_analysis.popularidade_geral(df_musica)
+    visualization.grafico_popularidade_geral(popularidade) #Vai salvar os gráficos na pasta
+    printar_msg(pdf, f"As músicas mais populares da banda AC/DC são:")
+    for index in range(0, 3):
+        pdf.drawString(margem+15,linha,f"-{popularidade.iloc[index]['Música']}({popularidade.iloc[index]['Popularidade']})")
+        linha -= 15
+        
+    printar_msg(pdf, f'As músicas menos famosas da banda AC/DC são:')
+    for index in range(3, 6):
+        pdf.drawString(margem+15,linha,f"-{popularidade.iloc[index]['Música']}({popularidade.iloc[index]['Popularidade']})")
+        linha -= 15
+    pdf.drawImage(f"img/questao_1.3/3atividade.png", margem+50, 200, width=400, preserveAspectRatio=True, mask='auto')
+    pdf.setFont('VeraBd', 15)
+    pdf.drawString(150,800,"Análise da Discografia da banda AC/DC") 
+
+def printar_quarta_questão(pdf):
+    global margem
+    global linha
+    duracoes_gerais = exploratory_analysis.tamanho_musica_geral(df_musica)
+    visualization.grafico_tamanho_musica_geral(duracoes_gerais) #Vai salvar os gráficos na pasta
+    printar_msg(pdf, f"As músicas mais longas da banda AC/DC são:")
+    for index in range(0, 3):
+        pdf.drawString(margem+15,linha,f"-{duracoes_gerais.iloc[index]['Música']}({duracoes_gerais.iloc[index]['Duração']})")
+        linha -= 15
+        
+    printar_msg(pdf, f'As músicas mais curtas da banda AC/DC são:')
+    for index in range(3, 6):
+        pdf.drawString(margem+15,linha,f"-{duracoes_gerais.iloc[index]['Música']}({duracoes_gerais.iloc[index]['Duração']})")
+        linha -= 15
+    pdf.drawImage(f"img/questao_1.4/4atividade.png", margem+50, 200, width=400, preserveAspectRatio=True, mask='auto')
+    pdf.setFont('VeraBd', 15)
+    pdf.drawString(150,800,"Análise da Discografia da banda AC/DC") 
+
 
 def interface():
     global margem
@@ -128,15 +162,27 @@ def interface():
     pdf.setFont('Vera', 12)
     linha-=15
     printar_segunda_questão(pdf)
+    pdf.showPage()
 
-    #Pergunta 2
+    #Pergunta 3
     linha = 750
     pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 3) Músicas mais ouvidas e músicas menos ouvidas [em toda a história da banda ou artista]:")
+    printar_msg(pdf, "Pergunta 3) Músicas mais ouvidas e músicas menos ouvidas")
+    printar_msg(pdf, "[em toda a história da banda ou artista]:")
     pdf.setFont('Vera', 12)
     linha-=15
     printar_terceira_questão(pdf)
+    pdf.showPage()
 
+    #Pergunta 4
+    linha = 750
+    pdf.setFont('VeraBd', 12)
+    printar_msg(pdf, "Pergunta 4) Músicas mais longas e músicas mais curtas")
+    printar_msg(pdf, "[em toda a história da banda ou artista]:")
+    pdf.setFont('Vera', 12)
+    linha-=15
+    printar_quarta_questão(pdf)
+    pdf.showPage()
 
     pdf.save()
 
