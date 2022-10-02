@@ -1,8 +1,16 @@
 import pandas as pd
 import numpy as np
 import re
-palavras_banidas = ['the', 'you', 'and','your','it\'s','she','get',"i'll","you're",'too','that','she\'s','i\'m','are','for','who', 'had','was','can']
+from wordcloud import STOPWORDS
+palavras_banidas = set(STOPWORDS)
 def separar_palavras_texto(texto: str) -> list[str]:
+    """_summary_
+
+    :param texto: _description_
+    :type texto: str
+    :return: _description_
+    :rtype: list[str]
+    """        
     """recebe uma string e a separa em palavras
 
     :param texto: string contendo o texto
@@ -10,8 +18,7 @@ def separar_palavras_texto(texto: str) -> list[str]:
     :return: retorna uma lista de palavras com todas as palavras com no minimo 3 letras contidas em texto
     :rtype: list[str]
     """
-    
-    print(texto)    
+     
     palavras = re.findall('\w{3,}',texto, flags=re.IGNORECASE)
     i=0
     while i < len(palavras):
@@ -32,7 +39,6 @@ def separar_palavras_lista(lista_texto: list[str]) -> list[str] :
     """    
     palavras = list()
     for texto in lista_texto:
-        print(texto)
         palavras.extend(separar_palavras_texto(texto))
     return palavras
 
@@ -45,8 +51,9 @@ def contar_palavras(lista_texto: list[str]) -> dict :
     :rtype: dict
     """    
     palavras = pd.Series(separar_palavras_lista(lista_texto))
-    
-    return palavras.value_counts().to_dict()
+    palavras = palavras.value_counts().to_dict()
+    print(palavras)
+    return palavras
 
 def frequencia_titulo(titulo: str, texto: str) -> dict[str, int]:
     """conta a frequencia de palavras do titulo dentro do texto
