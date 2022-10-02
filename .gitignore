@@ -128,3 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 *.csv
+analise_banda/teste.py
