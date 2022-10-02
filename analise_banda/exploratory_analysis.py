@@ -7,7 +7,17 @@ import pandas as pd
 df_musicas = pd.read_csv("dataset_acdc.csv")    
 df_albums = pd.read_csv("premiacoes.csv")
 
-def popularidade_album(df):
+def popularidade_album(df: pd.DataFrame) -> pd.DataFrame:
+    """A função ordena o DataFrame recebido com parâmetro de acordo com os valores da coluna de Popularidade por álbum,
+    separa em séries as informações dos 3 primeiros e 3 últimos, depois inclue em listas essas 
+    informações e enfim cria um dicionário com cada uma delas, após isso faz a transformação em DataFrame
+
+    Args:
+        df (pd.DataFrame): DataFrame das informações da banda
+
+    Returns:
+        pd.DataFrame: Dataframe contendo álbum, nome da música, popularidade e tipo da popularidade(Mais Populares ou Menos Populares)
+    """    
     albums = df["Álbum"].unique()
     
     lista_albuns = [] 
@@ -46,7 +56,16 @@ def popularidade_album(df):
 #### ITEM 2 ####
 ################
 
-def tamanho_musica_album(df):
+def tamanho_musica_album(df: pd.DataFrame) -> pd.DataFrame:
+    """A função ordena o DataFrame recebido com parâmetro de acordo com os valores da coluna de Duração por álbum,
+    separa em séries as informações dos 3 primeiros e 3 últimos, depois inclue em listas essas 
+    informações e enfim cria um dicionário com cada uma delas, após isso faz a transformação em DataFrame
+
+    Args:
+        df (pd.DataFrame): DataFrame das informações da banda
+    Returns:
+        pd.DataFrame: DataFrame contendo álbum, nome da música, duração e tipo da duração(Mais Longas ou Mais Curtas)
+    """    
     albums = df["Álbum"].unique()
 
     lista_albuns = []
@@ -84,7 +103,15 @@ def tamanho_musica_album(df):
 #### ITEM 3 ####
 ################
 
-def popularidade_geral(df):
+def popularidade_geral(df: pd.DataFrame) -> pd.DataFrame:
+    """A função ordena o DataFrame recebido com parâmetro de acordo com os valores da coluna de Popularidade,
+    separa em séries as informações dos 3 primeiros e 3 últimos, depois inclue em listas essas 
+    informações e enfim cria um dicionário com cada uma delas, após isso faz a transformação em DataFrame
+    Args:
+        df (pd.DataFrame): DataFrame das informações da banda
+    Returns:
+        pd.DataFrame: Dataframe contendo nome da música, popularidade e tipo da popularidade(Mais Populares ou Menos Populares)
+    """    
     musicas = []
     popularidade = []
     tipo_popularidade = []
@@ -111,12 +138,21 @@ def popularidade_geral(df):
     df_popularidade_geral = pd.DataFrame(popularidade_geral)
     return df_popularidade_geral
 
-
 ################
 #### ITEM 4 ####
 ################
 
-def tamanho_musica_geral(df):
+def tamanho_musica_geral(df: pd.DataFrame) -> pd.DataFrame:
+    """A função ordena o DataFrame recebido com parâmetro de acordo com os valores da coluna de Duração,
+    separa em séries as informações dos 3 primeiros e 3 últimos, depois inclue em listas essas 
+    informações e enfim cria um dicionário com cada uma delas, após isso faz a transformação em DataFrame
+
+    Args:
+        df (pd.DataFrame): DataFrame das informações da banda
+
+    Returns:
+        pd.DataFrame: DataFrame contendo nome da música, duração e tipo da duração(Mais Longas ou Mais Curtas)
+    """        
     musicas = []
     duracoes = []
     tipo_duracao = []
@@ -133,8 +169,8 @@ def tamanho_musica_geral(df):
     
     #Mais curta
     musicas_menos_longas = musicas_gerais["Música"].tail(n=3)
-    duracoes_mais_curtas = musicas_gerais["Duração"].tail(n=3)
-    for musica, duracao in zip(musicas_menos_longas, duracoes_mais_curtas):
+    duracoes_menos_longas = musicas_gerais["Duração"].tail(n=3)
+    for musica, duracao in zip(musicas_menos_longas, duracoes_menos_longas):
         musicas.append(musica)
         duracoes.append(duracao)
         tipo_duracao.append("Mais curtas")
@@ -147,7 +183,15 @@ def tamanho_musica_geral(df):
 #### ITEM 5 ####
 ################
 
-def premiacoes_album(df):
+def premiacoes_album(df: pd.DataFrame) -> pd.DataFrame:
+    """A função ordena o DataFrame recebido como parâmetro pelos valores da sua soma envolvendo peso com os prêmios em cada
+    tipo(prata, ouro, platina e diamante), separa em séries as informações dos 3 primeiros, depois inclue em listas essas 
+    informações e enfim cria um dicionário com cada uma delas, após isso faz a transformação em DataFrame
+    Args:
+        df (pd.DataFrame): DataFrame das premiações dos álbuns da banda
+    Returns:
+        pd.DataFrame: Dataframe dos 3 álbuns mais premiados e a quantidade de prêmios em cada tipo(prata, ouro, platina e diamante)
+    """    
     albums = []
     pratas = []
     ouros = []
@@ -178,7 +222,15 @@ def premiacoes_album(df):
 #### ITEM 6 ####
 ################
 
-def relacao_duracao_popularidade(df):
+def relacao_duracao_popularidade(df: pd.DataFrame) -> pd.DataFrame:
+    """A função cria um novo DataFrame contendo as informações da Popularidade e Duração do parâmetro recebido,
+    calcula e retorna a correlação entre os valores das colunas
+
+    Args:
+        df (pd.DataFrame): DataFrame das informações da banda
+    Returns:
+        pd.DataFrame: DataFrame da correlação entre a Popularidade das músicas e sua Duração
+    """    
     # Correlação entre a popularidade e a duração
     df_new = df[["Popularidade", "Duração"]]
     corr_df = df_new.corr(method="pearson")
