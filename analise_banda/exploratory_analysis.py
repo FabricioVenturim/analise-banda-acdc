@@ -78,6 +78,7 @@ def popularidade_geral(df: pd.DataFrame) -> pd.DataFrame:
     mais_popular = musicas_gerais[["Música", "Popularidade"]].head(n=3).assign(Tipo=["Mais Popular","Mais Popular","Mais Popular"])
     menos_popular = musicas_gerais[["Música", "Popularidade"]].tail(n=3).assign(Tipo=["Menos Popular","Menos Popular","Menos Popular"])
     df_final = pd.merge(mais_popular, menos_popular, how="outer")
+
     return df_final
 
 ################
@@ -99,6 +100,7 @@ def tamanho_musica_geral(df: pd.DataFrame) -> pd.DataFrame:
     musicas_mais_longas = musicas_gerais[["Música","Duração"]].head(n=3).assign(Tipo=["Mais Longas", "Mais Longas", "Mais longas"])
     musicas_mais_curtas = musicas_gerais[["Música","Duração"]].tail(n=3).assign(Tipo=["Mais Curtas", "Mais Curtas", "Mais Curtas"])
     df_final = pd.merge(musicas_mais_longas,musicas_mais_curtas,how="outer")
+
     return df_final
 
 ################
@@ -115,7 +117,25 @@ def premiacoes_album(df: pd.DataFrame) -> pd.DataFrame:
     """    
     albums_gerais = df.sort_values(by = "Soma_peso", ascending = False)
 
-    df_final = albums_gerais[["Álbum","Prata","Ouro","Platina","Diamante"]].head(n=3)
+    df_prata= albums_gerais[["Álbum","Prata"]].head(n=3)
+    df_prata.rename(columns={"Prata":"Quantidade"}, inplace=True)
+    df_prata.insert(2, "Tipo", "pratas", allow_duplicates=False)
+
+    df_ouro= albums_gerais[["Álbum","Ouro"]].head(n=3)
+    df_ouro.rename(columns={"Ouro":"Quantidade"}, inplace=True)
+    df_ouro.insert(2, "Tipo", "ouros", allow_duplicates=False)
+
+    df_platina= albums_gerais[["Álbum","Platina"]].head(n=3)
+    df_platina.rename(columns={"Platina":"Quantidade"}, inplace=True)
+    df_platina.insert(2, "Tipo", "platinas", allow_duplicates=False)
+
+    df_diamante= albums_gerais[["Álbum","Diamante"]].head(n=3)
+    df_diamante.rename(columns={"Diamante":"Quantidade"}, inplace=True)
+    df_diamante.insert(2, "Tipo", "diamantes", allow_duplicates=False)
+
+    df_final = pd.merge(df_prata, df_ouro, how="outer")
+    df_final = pd.merge(df_final, df_platina, how="outer")
+    df_final = pd.merge(df_final, df_diamante, how="outer")
 
     return df_final
 
@@ -135,4 +155,5 @@ def relacao_duracao_popularidade(df: pd.DataFrame) -> pd.DataFrame:
     # Correlação entre a popularidade e a duração
     df_new = df[["Popularidade", "Duração"]]
     corr_df = df_new.corr(method="pearson")
+    
     return corr_df
