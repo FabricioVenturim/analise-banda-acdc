@@ -54,12 +54,11 @@ def grafico_duracao_album(df_albuns):
         plt.close()
 
 #Gráficos da questão 3
-def grafico_popularidade_geral(df_albuns):
-    
+def grafico_popularidade_geral(df_musicas):
     #criando uma figure, axes, alterando tamanho
     fig, graf = plt.subplots(figsize=(9,6))
     #criando o gráfico de barras
-    sns.barplot(data=df_albuns, y="Música", x="Popularidade", ax=graf, hue = "Tipo Popularidade" )
+    sns.barplot(data=df_musicas, y="Música", x="Popularidade", ax=graf, hue = "Tipo Popularidade" )
     #adicionando título
     graf.set_title("Popularidade das Músicas da banda AC/DC", fontdict={'fontsize':15})
     #mudando nome e tamanho do label x e y
@@ -75,7 +74,6 @@ def grafico_popularidade_geral(df_albuns):
 def grafico_tamanho_musica_geral(df_musicas):
     #Transforma o dicionario em dataframe
     df_musicas["Música"].mask((df_musicas["Música"]=="Let There Be Rock") & (df_musicas["Duração"]==736133), other = "Let There Be Rock (LIVE)" , inplace=True)    
-
     #criando uma figure, axes, alterando tamanho
     fig, graf = plt.subplots(figsize=(9,6))
     #criando o gráfico de barras
@@ -89,6 +87,24 @@ def grafico_tamanho_musica_geral(df_musicas):
     graf.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
 
     graf.get_figure().savefig(f"img/questao_1.4/4atividade.png",bbox_inches='tight')
+    plt.close()
+
+#Gráficos da questão 5
+
+def grafico_premiacoes_album(df_premiacoes):
+    #criando uma figure, axes, alterando tamanho
+    fig, graf = plt.subplots(figsize=(9,6))
+    #criando o gráfico de barras
+    sns.barplot(data=df_premiacoes, y="Álbum", x="Quantidade", hue="Tipo", ax=graf)
+    #adicionando título
+    graf.set_title("Popularidade das Músicas da banda AC/DC", fontdict={'fontsize':15})
+    #mudando nome e tamanho do label x e y
+    graf.set_xlabel('Popularidade', fontdict={'fontsize':13})
+    graf.set_ylabel("")
+    #formatando legenda 
+    graf.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
+
+    graf.get_figure().savefig(f"img/questao_1.4/graf_premiacoes.png",bbox_inches='tight')
     plt.close()
 
 #Gráficos da questão 6
