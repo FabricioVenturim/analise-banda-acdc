@@ -12,7 +12,7 @@ def separar_palavras_texto(texto: str) -> list[str]:
     :rtype: list[str]
     """
      
-    palavras = re.findall('\w{3,}',texto, flags=re.IGNORECASE)
+    palavras = re.findall('[\'\w]{3,}',texto, flags=re.IGNORECASE)
     i=0
     while i < len(palavras):
         palavras[i] = palavras[i].lower()
