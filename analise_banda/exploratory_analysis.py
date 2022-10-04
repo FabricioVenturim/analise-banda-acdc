@@ -4,13 +4,6 @@ import re
 from wordcloud import STOPWORDS
 palavras_banidas = set(STOPWORDS)
 def separar_palavras_texto(texto: str) -> list[str]:
-    """_summary_
-
-    :param texto: _description_
-    :type texto: str
-    :return: _description_
-    :rtype: list[str]
-    """        
     """recebe uma string e a separa em palavras
 
     :param texto: string contendo o texto
@@ -42,17 +35,16 @@ def separar_palavras_lista(lista_texto: list[str]) -> list[str] :
         palavras.extend(separar_palavras_texto(texto))
     return palavras
 
-def contar_palavras(lista_texto: list[str]) -> dict :
+def contar_palavras(lista_texto: list[str]) -> dict[str, int] :
     """conta a frequencia de palavras dentro da lista
 
     :param lista_texto: lista de textos
     :type lista_texto: list[str]
     :return: serie com as palavras e suas contagens 
-    :rtype: dict
+    :rtype: dict[str, int]
     """    
     palavras = pd.Series(separar_palavras_lista(lista_texto))
     palavras = palavras.value_counts().to_dict()
-    print(palavras)
     return palavras
 
 def frequencia_titulo(titulo: str, texto: str) -> dict[str, int]:

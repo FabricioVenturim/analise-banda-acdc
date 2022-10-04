@@ -8,10 +8,13 @@ import matplotlib.pyplot as plt
 import exploratory_analysis as ea
 from os import path
 from PIL import Image
-
-def grey_color_func(word, font_size, position, orientation, random_state=None,
+rgb_max = 255.
+def blue_color_func(word, font_size, position, orientation, random_state=None,
                     **kwargs):
-    return "hsl(0, 0%%, %d%%)" % random.randint(60, 100)
+    """
+    função copiada de um exemplo do word cloud, não entedo direito mas funciona
+    """
+    return "hsl(215, 80%%, %d%%)" % random_state.randint(20, 30)
 musicas = pd.read_csv("dataset_acdc1.csv", encoding= 'UTF-8')
 musicas = musicas[['Álbum','Música','Letra']]
 # musicas = musicas.set_index(['Álbum','Música'])
@@ -64,8 +67,7 @@ def cloud_letras():
                     mask=mask,max_words=1000)
     cloud.generate_from_frequencies(ea.contar_palavras(musicas))
     plt.figure()
-    plt.imshow(cloud.recolor(color_func=grey_color_func, random_state=3), interpolation="bilinear")
+    plt.imshow(cloud.recolor(color_func=blue_color_func, random_state=3), interpolation="bilinear")
     plt.axis("off")
-    plt.show()
-
 print(cloud_letras())
+plt.show()
