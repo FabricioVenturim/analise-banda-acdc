@@ -20,7 +20,7 @@ def grafico_popularidade_album(df_albuns: pd.DataFrame):
         #criando uma figure, axes, alterando tamanho
         fig, graf = plt.subplots(figsize=(9,6))
         #criando o gráfico de barras
-        sns.barplot(data=musicas_album, y="Música", x="Popularidade", ax=graf, hue = "Tipo Popularidade" )
+        sns.barplot(data=musicas_album, y="Música", x="Popularidade", ax=graf, hue = "Tipo")
         #adicionando título
         graf.set_title(f"Popularidade das Músicas do Álbum {album}", fontdict={"fontsize":15})
         #mudando nome e tamanho do label x e y
@@ -52,7 +52,7 @@ def grafico_duracao_album(df_albuns: pd.DataFrame):
         #criando uma figure, axes, alterando tamanho
         fig, graf = plt.subplots(figsize=(9,6))
         #criando o gráfico de barras
-        sns.barplot(data=musicas_album, y="Música", x="Duração", ax=graf, hue = "Tipo Duração" )
+        sns.barplot(data=musicas_album, y="Música", x="Duração", ax=graf, hue = "Tipo")
         #adicionando título
         graf.set_title(f"Duração das Músicas do Álbum {album}", fontdict={"fontsize":15})
         #mudando nome e tamanho do label x e y
@@ -79,7 +79,7 @@ def grafico_popularidade_geral(df_musicas: pd.DataFrame):
     #criando uma figure, axes, alterando tamanho
     fig, graf = plt.subplots(figsize=(9,6))
     #criando o gráfico de barras
-    sns.barplot(data=df_musicas, y="Música", x="Popularidade", ax=graf, hue = "Tipo Popularidade" )
+    sns.barplot(data=df_musicas, y="Música", x="Popularidade", ax=graf, hue = "Tipo")
     #adicionando título
     graf.set_title("Popularidade das Músicas da banda AC/DC", fontdict={"fontsize":15})
     #mudando nome e tamanho do label x e y
@@ -107,7 +107,7 @@ def grafico_tamanho_musica_geral(df_musicas: pd.DataFrame):
     #criando uma figure, axes, alterando tamanho
     fig, graf = plt.subplots(figsize=(9,6))
     #criando o gráfico de barras
-    sns.barplot(data=df_musicas, y="Música", x="Duração", ax=graf, hue = "Tipo Duração" )
+    sns.barplot(data=df_musicas, y="Música", x="Duração", ax=graf, hue = "Tipo")
     #adicionando título
     graf.set_title("Duração das Músicas da banda AC/DC", fontdict={"fontsize":15})
     #mudando nome e tamanho do label x e y
