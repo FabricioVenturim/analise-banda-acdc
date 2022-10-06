@@ -35,7 +35,7 @@ def printar_msg(pdf: canvas.Canvas, msg: str):
     linha-=15
 
 
-def printar_primeira_questao(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+def printar_primeira_questao_grupo_1(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     """Função que escreve no pdf as músicas mais famosas e menos famosas de cada álbum, bem como seus gráficos
     
     :param pdf: pdf a ser editado
@@ -83,7 +83,7 @@ def printar_primeira_questao(pdf: canvas.Canvas, df_musica: pd.DataFrame):
             pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
             pdf.setFont("Vera", 12)
 
-def printar_segunda_questao(pdf: canvas.Canvas, df_musica:pd.DataFrame):
+def printar_segunda_questao_grupo_1(pdf: canvas.Canvas, df_musica:pd.DataFrame):
     """Função que escreve no pdf as músicas mais famosas e menos famosas de cada álbum, bem como seus gráficos
     
     :param pdf: pdf a ser editado
@@ -130,7 +130,7 @@ def printar_segunda_questao(pdf: canvas.Canvas, df_musica:pd.DataFrame):
             pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
             pdf.setFont("Vera", 12)
 
-def printar_terceira_questao(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+def printar_terceira_questao_grupo_1(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     """Função que escreve no pdf as músicas mais famosas e menos famosas de toda banda, bem como seus gráficos
     
     :param pdf: pdf a ser editado
@@ -162,7 +162,7 @@ def printar_terceira_questao(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC") 
 
 
-def printar_quarta_questao(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+def printar_quarta_questao_grupo_1(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     """Função que escreve no pdf as músicas mais longas e mais curtas de toda banda, bem como seus gráficos
     
     :param pdf: pdf a ser editado
@@ -194,7 +194,7 @@ def printar_quarta_questao(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC") 
 
 
-def printar_quinta_questao(pdf: canvas.Canvas, df_musica_premiacao: pd.DataFrame):
+def printar_quinta_questao_grupo_1(pdf: canvas.Canvas, df_musica_premiacao: pd.DataFrame):
     """Função que escreve no pdf os álbuns mais premiados da banda, bem como seus gráficos
     
     :param pdf: pdf a ser editado
@@ -227,7 +227,7 @@ def printar_quinta_questao(pdf: canvas.Canvas, df_musica_premiacao: pd.DataFrame
     pdf.setFont('VeraBd', 15)
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC") 
 
-def printar_sexta_questao(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+def printar_sexta_questao_grupo_1(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     """Função que escreve no pdf a correlação entre as variáveis popularidade e duração das músicas da banda, bem como seus gráficos
     
     :param pdf: pdf a ser editado
@@ -273,12 +273,13 @@ def gera_pdf(df_musica: pd.DataFrame, df_musica_premiacao: pd.DataFrame):
     pdf.setFont('VeraBd', 15)
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
     
+    #Grupo 1 de perguntas
     #Pergunta 1
     pdf.setFont('VeraBd', 12)
     printar_msg(pdf, "Pergunta 1) Músicas mais ouvidas e músicas menos ouvidas por Álbum: ")
     pdf.setFont('Vera', 12)
     linha-=15
-    printar_primeira_questao(pdf, df_musica)
+    printar_primeira_questao_grupo_1(pdf, df_musica)
     pdf.showPage()
 
     #Pergunta 2
@@ -287,7 +288,7 @@ def gera_pdf(df_musica: pd.DataFrame, df_musica_premiacao: pd.DataFrame):
     printar_msg(pdf, "Pergunta 2) Músicas mais longas e músicas mais curtas por Álbum:")
     pdf.setFont('Vera', 12)
     linha-=15
-    printar_segunda_questao(pdf, df_musica)
+    printar_segunda_questao_grupo_1(pdf, df_musica)
     pdf.showPage()
 
     #Pergunta 3
@@ -297,7 +298,7 @@ def gera_pdf(df_musica: pd.DataFrame, df_musica_premiacao: pd.DataFrame):
     printar_msg(pdf, "[em toda a história da banda ou artista]:")
     pdf.setFont('Vera', 12)
     linha-=15
-    printar_terceira_questao(pdf, df_musica)
+    printar_terceira_questao_grupo_1(pdf, df_musica)
     pdf.showPage()
 
     #Pergunta 4
@@ -307,7 +308,7 @@ def gera_pdf(df_musica: pd.DataFrame, df_musica_premiacao: pd.DataFrame):
     printar_msg(pdf, "[em toda a história da banda ou artista]:")
     pdf.setFont('Vera', 12)
     linha-=15
-    printar_quarta_questao(pdf, df_musica)
+    printar_quarta_questao_grupo_1(pdf, df_musica)
     pdf.showPage()
 
     #Pergunta 5
@@ -316,7 +317,7 @@ def gera_pdf(df_musica: pd.DataFrame, df_musica_premiacao: pd.DataFrame):
     printar_msg(pdf, "Pergunta 5) Álbuns mais premiados:")
     pdf.setFont('Vera', 12)
     linha-=15
-    printar_quinta_questao(pdf, df_musica_premiacao)
+    printar_quinta_questao_grupo_1(pdf, df_musica_premiacao)
     pdf.showPage()
 
     #Pergunta 6
@@ -325,8 +326,11 @@ def gera_pdf(df_musica: pd.DataFrame, df_musica_premiacao: pd.DataFrame):
     printar_msg(pdf, "Pergunta 6) Álbuns mais premiados:")
     pdf.setFont('Vera', 12)
     linha-=15
-    printar_sexta_questao(pdf, df_musica)
+    printar_sexta_questao_grupo_1(pdf, df_musica)
     pdf.showPage()
+
+    #Grupo 2 de perguntas
+    
 
     pdf.save()
 
