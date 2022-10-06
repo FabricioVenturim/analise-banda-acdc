@@ -29,7 +29,7 @@ def grafico_popularidade_album(df_albuns: pd.DataFrame):
         #formatando legenda 
         graf.legend(bbox_to_anchor=(1.05, 1), loc="upper left", borderaxespad=0)
 
-        graf.get_figure().savefig(f"../img/questao_1.1/1atividade-{index}.png",bbox_inches="tight")
+        graf.get_figure().savefig(f"img/questao_1.1/1atividade-{index}.png",bbox_inches="tight")
         index += 1
         plt.close()
 
@@ -61,7 +61,7 @@ def grafico_duracao_album(df_albuns: pd.DataFrame):
         #formatando legenda 
         graf.legend(bbox_to_anchor=(1.05, 1), loc="upper left", borderaxespad=0)
 
-        graf.get_figure().savefig(f"../img/questao_1.2/2atividade-{index}.png",bbox_inches="tight")
+        graf.get_figure().savefig(f"img/questao_1.2/2atividade-{index}.png",bbox_inches="tight")
         index += 1
         plt.close()
 
@@ -88,7 +88,7 @@ def grafico_popularidade_geral(df_musicas: pd.DataFrame):
     #formatando legenda 
     graf.legend(bbox_to_anchor=(1.05, 1), loc="upper left", borderaxespad=0)
 
-    graf.get_figure().savefig(f"../img/questao_1.3/3atividade.png",bbox_inches="tight")
+    graf.get_figure().savefig(f"img/questao_1.3/3atividade.png",bbox_inches="tight")
     plt.close()
 
 #############################
@@ -116,7 +116,7 @@ def grafico_tamanho_musica_geral(df_musicas: pd.DataFrame):
     #formatando legenda 
     graf.legend(bbox_to_anchor=(1.05, 1), loc="upper left", borderaxespad=0)
 
-    graf.get_figure().savefig(f"../img/questao_1.4/4atividade.png",bbox_inches="tight")
+    graf.get_figure().savefig(f"img/questao_1.4/4atividade.png",bbox_inches="tight")
     plt.close()
 
 #############################
@@ -142,7 +142,7 @@ def grafico_premiacoes_album(df_premiacoes: pd.DataFrame):
     #formatando legenda 
     graf.legend(bbox_to_anchor=(1.05, 1), loc="upper left", borderaxespad=0)
 
-    graf.get_figure().savefig(f"../img/questao_1.4/graf_premiacoes.png",bbox_inches="tight")
+    graf.get_figure().savefig(f"img/questao_1.4/graf_premiacoes.png",bbox_inches="tight")
     plt.close()
 
 #############################
@@ -161,7 +161,7 @@ def grafico_corresp(corr_df: pd.DataFrame):
     #adicionando título
     graf.set_title("Correlação entre Popularidade das músicas e sua Duração", fontdict={"fontsize":15})
     #salvar
-    graf.get_figure().savefig(f"../img/questao_1.6/corresp.png",bbox_inches="tight")
+    graf.get_figure().savefig(f"img/questao_1.6/corresp.png",bbox_inches="tight")
 
 def grafico_plot(df: pd.DataFrame):
     """Função para criar e salvar o gráfico de dispersão das variáveis popularidade e duração das músicas
@@ -179,4 +179,4 @@ def grafico_plot(df: pd.DataFrame):
     graf.set_xlabel("Popularidade", fontdict={"fontsize":13})
     graf.set_ylabel("Duração em milissegundos", fontdict={"fontsize":13})
     #salvar gráfico
-    graf.get_figure().savefig(f"../img/questao_1.6/plot.png",bbox_inches="tight")
+    graf.get_figure().savefig(f"img/questao_1.6/plot.png",bbox_inches="tight")
