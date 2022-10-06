@@ -75,3 +75,4 @@ def frequencia_titulo(titulo: str, texto: str) -> dict[str, int]:
 # titulos = ' '.join(titulos)
 
 # print(separar_palavras_texto(titulos))
+
