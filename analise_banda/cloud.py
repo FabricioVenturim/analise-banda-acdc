@@ -70,7 +70,7 @@ if __name__ == '__main__':
     plt.imshow(cloud)
     plt.axis("off")
 
-    plt.savefig('teste.png')
+    plt.savefig(f"img/questao_2.4/tagcloud_letras.png",bbox_inches="tight")
     letras = np.unique(musicas['Letra'])
     cloud = cloud_acdc(ea.frequencia_titulo(' '.join(nome_musicas),' '.join(letras)),
                     np.array(Image.open("logo_ACDC.png")))
@@ -78,11 +78,11 @@ if __name__ == '__main__':
     plt.imshow(cloud)
     plt.axis("off")
 
-    plt.savefig('teste1.png')
+    plt.savefig(f"img/questao_2.6/tagcloud_musicas_letras.png",bbox_inches="tight")
     cloud = cloud_acdc(ea.contar_palavras(nome_musicas),
                     np.array(Image.open("acdc_logo2.png")),'white', 5,'gold',
                     5, 80,clareza_min_letras=40, clareza_max_letras= 50)
     plt.figure()
     plt.imshow(cloud)
     plt.axis("off")
-    plt.savefig('teste2.png')
+    plt.savefig(f"img/questao_2.2/tagcloud_musicas.png",bbox_inches="tight")
