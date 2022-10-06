@@ -60,30 +60,29 @@ def cloud_acdc(palavras: dict[str, int], mask: np.ndarray,background: str ='blac
 
 
 
-# musicas = pd.read_csv("dataset_acdc1.csv", encoding= 'UTF-8')
-# musicas = musicas[['Álbum','Música','Letra']]
-# nome_musicas = np.unique(musicas['Música'])
-# cloud = cloud_acdc(ea.contar_palavras(nome_musicas), np.array(Image.open("acdc_logo2.png")),
-#                    'black', 5,'white',5, 80,
-#                    clareza_min_letras=40, clareza_max_letras= 50)
-# plt.figure()
-# plt.imshow(cloud)
-# plt.axis("off")
+musicas = pd.read_csv("dataset_acdc.csv", encoding= 'UTF-8')
+musicas = musicas[['Álbum','Música','Letra']]
+nome_musicas = np.unique(musicas['Música'])
+cloud = cloud_acdc(ea.contar_palavras(nome_musicas), np.array(Image.open("acdc_logo2.png")),
+                   'black', 5,'white',5, 80,
+                   clareza_min_letras=40, clareza_max_letras= 50)
+plt.figure()
+plt.imshow(cloud)
+plt.axis("off")
 
-# plt.show()
-# letras = np.unique(musicas['Letra'])
-# cloud = cloud_acdc(ea.frequencia_titulo(' '.join(nome_musicas),' '.join(letras)),
-#                    np.array(Image.open("logo_ACDC.png")))
-# plt.figure()
-# plt.imshow(cloud)
-# plt.axis("off")
+plt.show()
+letras = np.unique(musicas['Letra'])
+cloud = cloud_acdc(ea.frequencia_titulo(' '.join(nome_musicas),' '.join(letras)),
+                   np.array(Image.open("logo_ACDC.png")))
+plt.figure()
+plt.imshow(cloud)
+plt.axis("off")
 
-# plt.show()
-
-# cloud = cloud_acdc(ea.contar_palavras(nome_musicas),
-#                    np.array(Image.open("acdc_logo2.png")),'white', 5,'gold',
-#                    5, 80,clareza_min_letras=40, clareza_max_letras= 50)
-# plt.figure()
-# plt.imshow(cloud)
-# plt.axis("off")
-# plt.show()
+plt.show()
+cloud = cloud_acdc(ea.contar_palavras(nome_musicas),
+                   np.array(Image.open("acdc_logo2.png")),'white', 5,'gold',
+                   5, 80,clareza_min_letras=40, clareza_max_letras= 50)
+plt.figure()
+plt.imshow(cloud)
+plt.axis("off")
+plt.show()

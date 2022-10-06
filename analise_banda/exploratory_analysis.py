@@ -67,8 +67,6 @@ def frequencia_titulo(titulo: str, texto: str) -> dict[str, int]:
     return frequencia
 
 
-
-
 # musicas = pd.read_csv("dataset_acdc.csv", encoding= 'UTF-8')
 
 # musicas = musicas[['Álbum','Música','Letra']]
