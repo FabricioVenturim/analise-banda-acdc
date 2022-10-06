@@ -1,4 +1,3 @@
-import csv
 from analise_banda import *
 import pandas as pd
 import reportlab
@@ -36,7 +35,7 @@ def printar_msg(pdf: canvas.Canvas, msg: str):
     linha-=15
 
 
-def printar_primeira_questão(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+def printar_primeira_questao(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     """Função que escreve no pdf as músicas mais famosas e menos famosas de cada álbum, bem como seus gráficos
     
     :param pdf: pdf a ser editado
@@ -84,7 +83,7 @@ def printar_primeira_questão(pdf: canvas.Canvas, df_musica: pd.DataFrame):
             pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
             pdf.setFont("Vera", 12)
 
-def printar_segunda_questão(pdf: canvas.Canvas, df_musica:pd.DataFrame):
+def printar_segunda_questao(pdf: canvas.Canvas, df_musica:pd.DataFrame):
     """Função que escreve no pdf as músicas mais famosas e menos famosas de cada álbum, bem como seus gráficos
     
     :param pdf: pdf a ser editado
@@ -131,7 +130,7 @@ def printar_segunda_questão(pdf: canvas.Canvas, df_musica:pd.DataFrame):
             pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
             pdf.setFont("Vera", 12)
 
-def printar_terceira_questão(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+def printar_terceira_questao(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     """Função que escreve no pdf as músicas mais famosas e menos famosas de toda banda, bem como seus gráficos
     
     :param pdf: pdf a ser editado
@@ -163,7 +162,7 @@ def printar_terceira_questão(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC") 
 
 
-def printar_quarta_questão(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+def printar_quarta_questao(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     """Função que escreve no pdf as músicas mais longas e mais curtas de toda banda, bem como seus gráficos
     
     :param pdf: pdf a ser editado
@@ -195,7 +194,7 @@ def printar_quarta_questão(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC") 
 
 
-def printar_quinta_questão(pdf: canvas.Canvas, df_musica_premiacao: pd.DataFrame):
+def printar_quinta_questao(pdf: canvas.Canvas, df_musica_premiacao: pd.DataFrame):
     """Função que escreve no pdf os álbuns mais premiados da banda, bem como seus gráficos
     
     :param pdf: pdf a ser editado
@@ -228,7 +227,7 @@ def printar_quinta_questão(pdf: canvas.Canvas, df_musica_premiacao: pd.DataFram
     pdf.setFont('VeraBd', 15)
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC") 
 
-def printar_sexta_questão(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+def printar_sexta_questao(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     """Função que escreve no pdf a correlação entre as variáveis popularidade e duração das músicas da banda, bem como seus gráficos
     
     :param pdf: pdf a ser editado
@@ -253,19 +252,14 @@ def printar_sexta_questão(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     pdf.setFont('VeraBd', 15)
 
 
-def interface(csv_musica: str, csv_premiacoes: str):
+def gera_pdf(df_musica: pd.DataFrame, df_musica_premiacao: pd.DataFrame):
     """Função responsável por gerar o pdf com as perguntas respondidas
 
-    :param csv_musica: Caminho do csv com as músicas da banda
-    :type csv_musica: str
-    :param csv_premiacoes: Caminho do csv com as premiações de cada álbum da banda
-    :type csv_premiacoes: str
+    :param df_musica: DataFrame com as informações da discografia da banda AC/DC
+    :type df_musica: pd.DataFrame
+    :param csv_premiacoes: DataFrame com as premiações dos álbuns da banda AC/DC
+    :type df_musica_premiacao: pd.DataFrame
     """    
-    try: 
-        df_musica = pd.read_csv(csv_musica)
-        df_musica_premiacao = pd.read_csv(csv_premiacoes)
-    except FileNotFoundError:
-        print("Desculpe, o arquivo que você passou não foi encontrado")
 
     # margem e linha da localização da plotagem de texto
     global margem
@@ -284,7 +278,7 @@ def interface(csv_musica: str, csv_premiacoes: str):
     printar_msg(pdf, "Pergunta 1) Músicas mais ouvidas e músicas menos ouvidas por Álbum: ")
     pdf.setFont('Vera', 12)
     linha-=15
-    printar_primeira_questão(pdf, df_musica)
+    printar_primeira_questao(pdf, df_musica)
     pdf.showPage()
 
     #Pergunta 2
@@ -293,7 +287,7 @@ def interface(csv_musica: str, csv_premiacoes: str):
     printar_msg(pdf, "Pergunta 2) Músicas mais longas e músicas mais curtas por Álbum:")
     pdf.setFont('Vera', 12)
     linha-=15
-    printar_segunda_questão(pdf, df_musica)
+    printar_segunda_questao(pdf, df_musica)
     pdf.showPage()
 
     #Pergunta 3
@@ -303,7 +297,7 @@ def interface(csv_musica: str, csv_premiacoes: str):
     printar_msg(pdf, "[em toda a história da banda ou artista]:")
     pdf.setFont('Vera', 12)
     linha-=15
-    printar_terceira_questão(pdf, df_musica)
+    printar_terceira_questao(pdf, df_musica)
     pdf.showPage()
 
     #Pergunta 4
@@ -313,7 +307,7 @@ def interface(csv_musica: str, csv_premiacoes: str):
     printar_msg(pdf, "[em toda a história da banda ou artista]:")
     pdf.setFont('Vera', 12)
     linha-=15
-    printar_quarta_questão(pdf, df_musica)
+    printar_quarta_questao(pdf, df_musica)
     pdf.showPage()
 
     #Pergunta 5
@@ -322,7 +316,7 @@ def interface(csv_musica: str, csv_premiacoes: str):
     printar_msg(pdf, "Pergunta 5) Álbuns mais premiados:")
     pdf.setFont('Vera', 12)
     linha-=15
-    printar_quinta_questão(pdf, df_musica_premiacao)
+    printar_quinta_questao(pdf, df_musica_premiacao)
     pdf.showPage()
 
     #Pergunta 6
@@ -331,9 +325,26 @@ def interface(csv_musica: str, csv_premiacoes: str):
     printar_msg(pdf, "Pergunta 6) Álbuns mais premiados:")
     pdf.setFont('Vera', 12)
     linha-=15
-    printar_sexta_questão(pdf, df_musica)
+    printar_sexta_questao(pdf, df_musica)
     pdf.showPage()
 
     pdf.save()
+
+
+def interface(csv_musica: str, csv_premiacoes: str):
+    """Função que receberá dois csv e irá convertê-los em dois DataFrames para as demais funções
+
+    :param csv_musica: Caminho do csv com as músicas da banda
+    :type csv_musica: str
+    :param csv_premiacoes: Caminho do csv com as premiações de cada álbum da banda
+    :type csv_premiacoes: str
+    """    
+    try: 
+        df_musica = pd.read_csv(csv_musica)
+        df_musica_premiacao = pd.read_csv(csv_premiacoes)
+    except FileNotFoundError:
+        print("Desculpe, o arquivo que você passou não foi encontrado")
+    else:
+        gera_pdf(df_musica, df_musica_premiacao)
 
 interface("dataset_acdc.csv", "premiacoes.csv")
