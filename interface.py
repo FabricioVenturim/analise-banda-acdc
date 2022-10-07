@@ -235,13 +235,13 @@ def printar_sexta_questao_grupo_1(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     :param df_musica: DataFrame com as colunas de poplaridade e duração das músicas da banda
     :type df_musica: pd.DataFrame
     """     
-
+    
     global margem
     global linha
     correlacao = exploratory_analysis.relacao_duracao_popularidade(df_musica) #Pega o df da correlação
     visualization.grafico_corresp(correlacao) #Vai salvar os gráficos na pasta
     visualization.grafico_plot(df_musica) #Vai salvar os gráficos na pasta
-    
+
     #Printar a correlação
     printar_msg(pdf, f"A correlação entre a duração das músicas e a popularidade é de {correlacao['Popularidade'].iloc[1]}")
     printar_msg(pdf, f"Logo, apesar de ter uma leve correlação inversa, podemos dizer que não há correlação.")
@@ -251,6 +251,154 @@ def printar_sexta_questao_grupo_1(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     pdf.drawImage(f"img/questao_1.6/plot.png", margem+50, -25, width=400, preserveAspectRatio=True, mask='auto')
     pdf.setFont('VeraBd', 15)
 
+def printar_primeira_questao_grupo_2(pdf, df_musica):
+    global margem
+    global linha
+
+    palavras_mais_comuns = exploratory_analysis.pergunta2_1(df_musica)
+    for key, value in palavras_mais_comuns.items():
+        pdf.drawString(margem,linha, f"{key}: {value}.")
+        linha -= 15
+    pdf.setFont('VeraBd', 15)
+    pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
+
+def printar_segunda_questao_grupo_2(pdf, df_musica):
+    global margem
+    global linha
+
+    palavras_mais_comuns = exploratory_analysis.pergunta2_2(df_musica)
+    for key, value in palavras_mais_comuns.items():
+        pdf.drawString(margem,linha, f"{key}: {value}.")
+        linha -= 15
+        if linha < 80: #Estamos mostrando apenas as palavras mais comuns
+            break
+    pdf.setFont('VeraBd', 15)
+    pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
+    pdf.showPage()
+    
+    cloud.cloud_1(df_musica)
+    pdf.drawImage(f"img/questao_2.2/tagcloud_musicas.png", margem, 500, width=500, preserveAspectRatio=True, mask='auto')
+    pdf.setFont('VeraBd', 15)
+    pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
+
+def printar_terceira_questao_grupo_2(pdf, df_musica):
+    global margem
+    global linha
+
+    palavras_mais_comuns = exploratory_analysis.pergunta2_3(df_musica)
+    quant_album_pag = 5
+    for album, palavras in palavras_mais_comuns.items():
+        pdf.drawString(margem,linha,f"Palavras mais comuns no álbum {album}:")
+        linha -= 15
+        quant = 5
+        for palavra, quantidade in palavras.items():
+            if quant < 0:
+                break
+            pdf.drawString(margem,linha,f"{palavra}: {quantidade}")
+            linha -= 15
+            quant -= 1
+        linha -= 15
+        quant_album_pag -= 1
+        if quant_album_pag < 0:
+            quant_album_pag = 5
+            pdf.showPage()
+            linha = 720
+            #Título de toda página nova
+            pdf.setFont('VeraBd', 15)
+            pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
+            pdf.setFont("Vera", 12)
+
+def printar_quarta_questao_grupo_2(pdf, df_musica):
+    global margem
+    global linha
+
+    palavras_mais_comuns = exploratory_analysis.pergunta2_4(df_musica)
+    for palavra, quant in palavras_mais_comuns.items():
+        pdf.drawString(margem,linha, f"{palavra}: {quant}.")
+        linha -= 15
+        if linha < 80: #Estamos mostrando apenas as palavras mais comuns
+            break
+    pdf.setFont('VeraBd', 15)
+    pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
+    pdf.showPage()
+    
+    cloud.cloud_2(df_musica)
+    pdf.drawImage(f"img/questao_2.4/tagcloud_letras.png", margem, 500, width=500, preserveAspectRatio=True, mask='auto')
+    pdf.setFont('VeraBd', 15)
+    pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
+
+def printar_quinta_questao_grupo_2(pdf, df_musica):
+    global margem
+    global linha
+
+    palavras_mais_comuns = exploratory_analysis.pergunta2_5(df_musica)
+    for palavra, quant in palavras_mais_comuns.items():
+        pdf.drawString(margem,linha, f"{palavra}: {quant}.")
+        linha -= 15
+    linha -= 15 
+    printar_msg(pdf, "O tema dos títulos aparecem muito nas letras dos álbuns,")
+    printar_msg(pdf, "como as palavras got, rock, back, let e want.")
+
+    pdf.setFont('VeraBd', 15)
+    pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
+
+def printar_sexta_questao_grupo_2(pdf, df_musica):
+    global margem
+    global linha
+
+    palavras_mais_comuns = exploratory_analysis.pergunta2_6(df_musica)
+    pdf.drawString(margem, linha,"As palavras do título aparecem nas letras: ")
+    linha -= 15
+    for palavra, quant in palavras_mais_comuns.items():
+        pdf.drawString(margem, linha,f"{palavra}: {quant}")
+        linha -= 15
+        if linha < 40:
+            pdf.showPage()
+            linha = 720
+            #Título de toda página nova
+            pdf.setFont('VeraBd', 15)
+            pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
+            pdf.setFont("Vera", 12)
+
+    linha -= 15 
+    printar_msg(pdf, "O tema dos títulos das músicas aparecem muito nas letras dos álbuns.")
+
+    cloud.cloud_3(df_musica)
+    pdf.drawImage(f"img/questao_2.6/tagcloud_musicas_letras.png", margem, 325, width=500, preserveAspectRatio=True, mask='auto')
+
+    pdf.setFont('VeraBd', 15)
+    pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
+   
+    
+    
+
+    
+
+def printar_primeira_questao_grupo_3(pdf, df_musica):
+    global margem
+    global linha
+
+    visualization.pergunta_1(df_musica)
+    printar_msg(pdf, "Como a correlação é de -0,13, temos que não há correlação.")
+    pdf.drawImage(f"img/questoes_3/energia.png", margem+50, 250, width=400, preserveAspectRatio=True, mask='auto')
+
+
+
+def printar_segunda_questao_grupo_3(pdf, df_musica):
+    global margem
+    global linha
+
+    visualization.pergunta_2(df_musica)
+    printar_msg(pdf, "Como a correlação é de 0,25, temos que não há correlação.")
+    pdf.drawImage(f"img/questoes_3/Tempo.png", margem+50, 250, width=400, preserveAspectRatio=True, mask='auto')
+
+def printar_terceira_questao_grupo_3(pdf, df_musica):
+    global margem
+    global linha
+
+    visualization.pergunta_3(df_musica)
+    printar_msg(pdf, "Como a correlação é de 0,11, temos que não há correlação.")
+    pdf.drawImage(f"img/questoes_3/dancabilidade.png", margem+50, 250, width=400, preserveAspectRatio=True, mask='auto')
 
 def gera_pdf(df_musica: pd.DataFrame, df_musica_premiacao: pd.DataFrame):
     """Função responsável por gerar o pdf com as perguntas respondidas
@@ -274,6 +422,9 @@ def gera_pdf(df_musica: pd.DataFrame, df_musica_premiacao: pd.DataFrame):
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
     
     #Grupo 1 de perguntas
+    pdf.setFont('VeraBd', 12)
+    pdf.drawString(250,780,"Grupo 1 de Perguntas")
+    
     #Pergunta 1
     pdf.setFont('VeraBd', 12)
     printar_msg(pdf, "Pergunta 1) Músicas mais ouvidas e músicas menos ouvidas por Álbum: ")
@@ -330,10 +481,94 @@ def gera_pdf(df_musica: pd.DataFrame, df_musica_premiacao: pd.DataFrame):
     pdf.showPage()
 
     #Grupo 2 de perguntas
-    
+    pdf.setFont('VeraBd', 12)
+    pdf.drawString(250,780,"Grupo 2 de Perguntas")
+    #Pergunta 1
+    linha = 750
+    pdf.setFont('VeraBd', 12)
+    printar_msg(pdf, "Pergunta 1) Quais são as palavras mais comuns nos títulos dos Álbuns?")
+    pdf.setFont('Vera', 12)
+    linha-=15
+    printar_primeira_questao_grupo_2(pdf, df_musica)
+    pdf.showPage()
+
+    #Pergunta 2
+    linha = 750
+    pdf.setFont('VeraBd', 12)
+    printar_msg(pdf, "Pergunta 2) Quais são as palavras mais comuns nos títulos das músicas?")
+    pdf.setFont('Vera', 12)
+    linha-=15
+    printar_segunda_questao_grupo_2(pdf, df_musica)
+    pdf.showPage()
+
+    #Pergunta 3
+    linha = 750
+    pdf.setFont('VeraBd', 12)
+    printar_msg(pdf, "Pergunta 3) Quais são as palavras mais comuns, por Álbum?")
+    pdf.setFont('Vera', 12)
+    linha-=15
+    printar_terceira_questao_grupo_2(pdf, df_musica)
+    pdf.showPage()
+
+    #Pergunta 4
+    linha = 750
+    pdf.setFont('VeraBd', 12)
+    printar_msg(pdf, "Pergunta 4) Quais são as palavras mais comuns, em toda a discografia?")
+    pdf.setFont('Vera', 12)
+    linha-=15
+    printar_quarta_questao_grupo_2(pdf, df_musica)
+    pdf.showPage()
+
+    #Pergunta 5
+    linha = 750
+    pdf.setFont('VeraBd', 12)
+    printar_msg(pdf, "Pergunta 5) O título de um álbum é tema recorrente nas letras?")
+    pdf.setFont('Vera', 12)
+    linha-=15
+    printar_quinta_questao_grupo_2(pdf, df_musica)
+    pdf.showPage()
+
+    #Pergunta 6
+    linha = 750
+    pdf.setFont('VeraBd', 12)
+    printar_msg(pdf, "Pergunta 6) O título de uma música é tema recorrente nas letras?")
+    pdf.setFont('Vera', 12)
+    linha-=15
+    printar_sexta_questao_grupo_2(pdf, df_musica)
+    pdf.showPage()
+
+    #Grupo 3 de perguntas
+    pdf.setFont('VeraBd', 12)
+    pdf.drawString(250,780,"Grupo 3 de Perguntas")
+    #Pergunta 1
+    linha = 750
+    pdf.setFont('VeraBd', 12)
+    printar_msg(pdf, "Pergunta 1) Há correlação entre Popularidade e a Energia das músicas?")
+    pdf.setFont('Vera', 12)
+    linha-=15
+    printar_primeira_questao_grupo_3(pdf, df_musica)
+    pdf.showPage()
+
+    #Pergunta 1
+    linha = 750
+    pdf.setFont('VeraBd', 12)
+    printar_msg(pdf, "Pergunta 2) Há correlação entre Popularidade e a Dançabilidade das músicas?")
+    pdf.setFont('Vera', 12)
+    linha-=15
+    printar_primeira_questao_grupo_3(pdf, df_musica)
+    pdf.showPage()
+
+    #Pergunta 1
+    linha = 750
+    pdf.setFont('VeraBd', 12)
+    printar_msg(pdf, "Pergunta 3) Há correlação entre Popularidade e a Tempo das músicas?")
+    pdf.setFont('Vera', 12)
+    linha-=15
+    printar_primeira_questao_grupo_3(pdf, df_musica)
+    pdf.showPage()
+
 
     pdf.save()
-
 
 def interface(csv_musica: str, csv_premiacoes: str):
     """Função que receberá dois csv e irá convertê-los em dois DataFrames para as demais funções
