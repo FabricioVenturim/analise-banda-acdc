@@ -12,7 +12,11 @@ pip install -r requirements.txt
 
 Passo 2: Para executar o programa, é necessário rodar o arquivo main.py da pasta. Nele há apenas um código que chamará a função interface do módulo.
 
+OBS: Certifique-se que os dois csv disponibilizados aqui estão na pasta da main.
+
 ## Projeto:
+
+O spotify disponibilza vários dados sobre as músicas, como a popularidade, energia da música, tempo, instrumentalidade, entre outros. Portanto achamos interessante analisar esses dados e ver se conseguimos encontrar alguma relação entre eles e a popularidade da música.
 
 ### interface:
 
@@ -29,20 +33,17 @@ Módulo responsável por criar o csv com as informações de cada música dos á
 
 ### exploratory_analysis:
 
-Módulo responsável por responder o grupo 1 de perguntas:
+Módulo responsável por responder as perguntas da etapa 2 do trabalho
+Mais informações sobre as perguntas: https://github.com/barrafas/Monitoria_LP/blob/main/Aulas%20.py/Trabalho%20A1.md
 
-* Músicas mais ouvidas e músicas menos ouvidas por Álbum
+*Grupo 3 de perguntas:
 
-* Músicas mais longas e músicas mais curtas por Álbum
-
-* Músicas mais ouvidas e músicas menos ouvidas [em toda a história da banda ou artista]
-
-* Músicas mais longas e músicas mais curtas [em toda a história da banda ou artista]
-
-* Álbuns mais premiados [https://twiftnews.com/lifestyle/top-6-most-prestigious-music-awards/]
-
-* Existe alguma relação entre a duração da música e sua popularidade?
+O spotify disponibilza vários dados sobre as músicas, como a popularidade, energia da música, tempo, instrumentalidade, entre outros. Portanto achamos interessante analisar esses dados e ver se conseguimos encontrar alguma relação entre eles e a popularidade da música.
 
 ### visualization:
 
-Módulo responsável por criar as visualizações do grupo de perguntas 1. Para isso, foram utilizadas as bibliotecas ```seaborn``` e ```matplotlib```.
+Módulo responsável por criar as visualizações. Para isso, foram utilizadas as bibliotecas ```seaborn``` e ```matplotlib```.
+
+### cloud:
+
+Módulo responsável por criar os World Cloud.  Para isso, foram utilizadas as bibliotecas ```matplotlib```, ```tracemalloc``` e ```wordcloud```.
