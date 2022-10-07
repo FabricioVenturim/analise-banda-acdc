@@ -1,4 +1,5 @@
 from tracemalloc import stop
+import pandas as pd
 import numpy as np
 from wordcloud import WordCloud, ImageColorGenerator, STOPWORDS
 import matplotlib.pyplot as plt
@@ -53,10 +54,31 @@ def cloud_acdc(palavras: dict[str, int], mask: np.ndarray,background: str ='blac
     cloud = cloud.recolor(color_func=letras_coloridas, random_state=3)
     return cloud
 
+def cloud_1(df_musicas: pd.DataFrame): 
+    """Cria um wordcloud para a frequência das palavras no nomes das músicas
 
-def cloud_1(df_musicas):
+    :param df_musicas: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musicas: pd.DataFrame
+    """   
+    #detro das letras do ACDC
     musicas = df_musicas[['Álbum','Música','Letra']]
-    #Cria um wordcloud com as palavras mais frequentes de todas as letras do ACDC
+    nome_musicas = np.unique(musicas['Música'])
+    cloud = cloud_acdc(exploratory_analysis.contar_palavras(nome_musicas),
+                    np.array(Image.open("acdc_logo2.png")),'white', 5,'gold',
+                    5, 80,clareza_min_letras=40, clareza_max_letras= 50)
+    plt.figure()
+    plt.imshow(cloud)
+    plt.axis("off")
+    #salva a imagem
+    plt.savefig(f"img/questao_2.2/tagcloud_musicas.png",bbox_inches="tight")
+
+def cloud_2(df_musicas: pd.DataFrame):
+    """Cria um wordcloud com as palavras mais frequentes de todas as letras do ACDC
+
+    :param df_musicas: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musicas: pd.DataFrame
+    """    
+    musicas = df_musicas[['Álbum','Música','Letra']]
     letras = np.unique(musicas['Letra'])
     cloud = cloud_acdc(exploratory_analysis.contar_palavras(letras), np.array(Image.open("acdc_logo2.png")),
                     'black', 5,'white',5, 80,
@@ -67,8 +89,12 @@ def cloud_1(df_musicas):
     #salva a imagem
     plt.savefig(f"img/questao_2.4/tagcloud_letras.png",bbox_inches="tight")
 
-def cloud_2(df_musicas): 
-    #Cria um wordcloud para a frequência das palavras no nomes das músicas
+def cloud_3(df_musicas: pd.DataFrame): 
+    """Cria um wordcloud para a frequência das palavras no nomes das músicas
+
+    :param df_musicas: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musicas: pd.DataFrame
+    """   
     #detro das letras do ACDC
     musicas = df_musicas[['Álbum','Música','Letra']]
     letras = np.unique(musicas['Letra'])
@@ -81,15 +107,3 @@ def cloud_2(df_musicas):
     #salva a imagem
     plt.savefig(f"img/questao_2.6/tagcloud_musicas_letras.png",bbox_inches="tight")
 
-def cloud_3(df_musicas): 
-    #Cria um wordcloud para a frequência das palavras no nomes das músicas
-    musicas = df_musicas[['Álbum','Música','Letra']]
-    nome_musicas = np.unique(musicas['Música'])
-    cloud = cloud_acdc(exploratory_analysis.contar_palavras(nome_musicas),
-                    np.array(Image.open("acdc_logo2.png")),'white', 5,'gold',
-                    5, 80,clareza_min_letras=40, clareza_max_letras= 50)
-    plt.figure()
-    plt.imshow(cloud)
-    plt.axis("off")
-    #salva a imagem
-    plt.savefig(f"img/questao_2.2/tagcloud_musicas.png",bbox_inches="tight")

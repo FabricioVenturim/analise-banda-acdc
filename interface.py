@@ -251,22 +251,38 @@ def printar_sexta_questao_grupo_1(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     pdf.drawImage(f"img/questao_1.6/plot.png", margem+50, -25, width=400, preserveAspectRatio=True, mask='auto')
     pdf.setFont('VeraBd', 15)
 
-def printar_primeira_questao_grupo_2(pdf, df_musica):
+def printar_primeira_questao_grupo_2(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+    """Função que escreve no pdf a pergunta 1 do grupo de perguntas 2
+
+    :param pdf: pdf a ser editado
+    :type pdf: canvas.Canvas
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """    
     global margem
     global linha
 
     palavras_mais_comuns = exploratory_analysis.pergunta2_1(df_musica)
-    for key, value in palavras_mais_comuns.items():
-        pdf.drawString(margem,linha, f"{key}: {value}.")
+    #pega cada paravra e sua quantidade
+    for palavra, quant in palavras_mais_comuns.items():
+        pdf.drawString(margem,linha, f"{palavra}: {quant}.")
         linha -= 15
     pdf.setFont('VeraBd', 15)
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
 
-def printar_segunda_questao_grupo_2(pdf, df_musica):
+def printar_segunda_questao_grupo_2(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+    """Função que escreve no pdf a pergunta 2 do grupo de perguntas 2
+
+    :param pdf: pdf a ser editado
+    :type pdf: canvas.Canvas
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """   
     global margem
     global linha
 
     palavras_mais_comuns = exploratory_analysis.pergunta2_2(df_musica)
+    #pega cada paravra e sua quantidade
     for key, value in palavras_mais_comuns.items():
         pdf.drawString(margem,linha, f"{key}: {value}.")
         linha -= 15
@@ -276,21 +292,32 @@ def printar_segunda_questao_grupo_2(pdf, df_musica):
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
     pdf.showPage()
     
+    #Colocar o world cloud no pdf
     cloud.cloud_1(df_musica)
     pdf.drawImage(f"img/questao_2.2/tagcloud_musicas.png", margem, 500, width=500, preserveAspectRatio=True, mask='auto')
     pdf.setFont('VeraBd', 15)
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
 
-def printar_terceira_questao_grupo_2(pdf, df_musica):
+def printar_terceira_questao_grupo_2(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+    """Função que escreve no pdf a pergunta 1 do grupo de perguntas 2
+
+    :param pdf: pdf a ser editado
+    :type pdf: canvas.Canvas
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """   
+
     global margem
     global linha
 
     palavras_mais_comuns = exploratory_analysis.pergunta2_3(df_musica)
-    quant_album_pag = 5
+    quant_album_pag = 5 #Quantidade máxima de álbuns que cabe por página
+    #pega cada album e sua lista de palavras
     for album, palavras in palavras_mais_comuns.items():
         pdf.drawString(margem,linha,f"Palavras mais comuns no álbum {album}:")
         linha -= 15
         quant = 5
+        #pega cada paravra e sua quantidade
         for palavra, quantidade in palavras.items():
             if quant < 0:
                 break
@@ -299,6 +326,7 @@ def printar_terceira_questao_grupo_2(pdf, df_musica):
             quant -= 1
         linha -= 15
         quant_album_pag -= 1
+        #Se a quantidade ficar abaixo de 0, ele quebra a página e vai repetindo 
         if quant_album_pag < 0:
             quant_album_pag = 5
             pdf.showPage()
@@ -308,11 +336,20 @@ def printar_terceira_questao_grupo_2(pdf, df_musica):
             pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
             pdf.setFont("Vera", 12)
 
-def printar_quarta_questao_grupo_2(pdf, df_musica):
+def printar_quarta_questao_grupo_2(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+    """Função que escreve no pdf a pergunta 1 do grupo de perguntas 2
+
+    :param pdf: pdf a ser editado
+    :type pdf: canvas.Canvas
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """   
+    
     global margem
     global linha
 
     palavras_mais_comuns = exploratory_analysis.pergunta2_4(df_musica)
+    #pega cada paravra e sua quantidade
     for palavra, quant in palavras_mais_comuns.items():
         pdf.drawString(margem,linha, f"{palavra}: {quant}.")
         linha -= 15
@@ -322,19 +359,29 @@ def printar_quarta_questao_grupo_2(pdf, df_musica):
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
     pdf.showPage()
     
+    #Coloca o world cloud na página
     cloud.cloud_2(df_musica)
     pdf.drawImage(f"img/questao_2.4/tagcloud_letras.png", margem, 500, width=500, preserveAspectRatio=True, mask='auto')
     pdf.setFont('VeraBd', 15)
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
 
-def printar_quinta_questao_grupo_2(pdf, df_musica):
+def printar_quinta_questao_grupo_2(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+    """Função que escreve no pdf a pergunta 1 do grupo de perguntas 2
+
+    :param pdf: pdf a ser editado
+    :type pdf: canvas.Canvas
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """   
+    
     global margem
     global linha
 
     palavras_mais_comuns = exploratory_analysis.pergunta2_5(df_musica)
+    #pega cada paravra e sua quantidade
     for palavra, quant in palavras_mais_comuns.items():
         pdf.drawString(margem,linha, f"{palavra}: {quant}.")
-        linha -= 15
+        linha -= 15 #Só queremos as mais comuns
     linha -= 15 
     printar_msg(pdf, "O tema dos títulos aparecem muito nas letras dos álbuns,")
     printar_msg(pdf, "como as palavras got, rock, back, let e want.")
@@ -342,13 +389,22 @@ def printar_quinta_questao_grupo_2(pdf, df_musica):
     pdf.setFont('VeraBd', 15)
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
 
-def printar_sexta_questao_grupo_2(pdf, df_musica):
+def printar_sexta_questao_grupo_2(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+    """Função que escreve no pdf a pergunta 1 do grupo de perguntas 2
+
+    :param pdf: pdf a ser editado
+    :type pdf: canvas.Canvas
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """   
+    
     global margem
     global linha
 
     palavras_mais_comuns = exploratory_analysis.pergunta2_6(df_musica)
     pdf.drawString(margem, linha,"As palavras do título aparecem nas letras: ")
     linha -= 15
+    #pega cada paravra e sua quantidade
     for palavra, quant in palavras_mais_comuns.items():
         pdf.drawString(margem, linha,f"{palavra}: {quant}")
         linha -= 15
@@ -363,18 +419,24 @@ def printar_sexta_questao_grupo_2(pdf, df_musica):
     linha -= 15 
     printar_msg(pdf, "O tema dos títulos das músicas aparecem muito nas letras dos álbuns.")
 
+    #Coloca o would cloud na página
     cloud.cloud_3(df_musica)
     pdf.drawImage(f"img/questao_2.6/tagcloud_musicas_letras.png", margem, 325, width=500, preserveAspectRatio=True, mask='auto')
 
     pdf.setFont('VeraBd', 15)
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
    
-    
-    
+#Grupo 3 de questões
 
-    
+def printar_primeira_questao_grupo_3(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+    """Função que escreve no pdf a pergunta 1 do grupo de perguntas 2
 
-def printar_primeira_questao_grupo_3(pdf, df_musica):
+    :param pdf: pdf a ser editado
+    :type pdf: canvas.Canvas
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """   
+
     global margem
     global linha
 
@@ -384,7 +446,15 @@ def printar_primeira_questao_grupo_3(pdf, df_musica):
 
 
 
-def printar_segunda_questao_grupo_3(pdf, df_musica):
+def printar_segunda_questao_grupo_3(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+    """Função que escreve no pdf a pergunta 1 do grupo de perguntas 2
+
+    :param pdf: pdf a ser editado
+    :type pdf: canvas.Canvas
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """   
+    
     global margem
     global linha
 
@@ -392,7 +462,15 @@ def printar_segunda_questao_grupo_3(pdf, df_musica):
     printar_msg(pdf, "Como a correlação é de 0,25, temos que não há correlação.")
     pdf.drawImage(f"img/questoes_3/Tempo.png", margem+50, 250, width=400, preserveAspectRatio=True, mask='auto')
 
-def printar_terceira_questao_grupo_3(pdf, df_musica):
+def printar_terceira_questao_grupo_3(pdf: canvas.Canvas, df_musica: pd.DataFrame):
+    """Função que escreve no pdf a pergunta 1 do grupo de perguntas 2
+
+    :param pdf: pdf a ser editado
+    :type pdf: canvas.Canvas
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """   
+    
     global margem
     global linha
 
@@ -586,4 +664,3 @@ def interface(csv_musica: str, csv_premiacoes: str):
     else:
         gera_pdf(df_musica, df_musica_premiacao)
 
-interface("dataset_acdc.csv", "premiacoes.csv")

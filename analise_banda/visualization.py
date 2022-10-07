@@ -183,12 +183,17 @@ def grafico_plot(df: pd.DataFrame):
 
 #gráficos das questão do grupo 3:
 
-def pergunta_1(df_musica):
-    """O spotify disponibilza vários dados sobre as músicas, 
+"""O spotify disponibilza vários dados sobre as músicas, 
     como a popularidade, energia da música, tempo, instrumentalidade, entre outros.
     Portanto achamos interessante analisar esses dados e ver se conseguimos encontrar
     Alguma relação entre eles e a popularidade da música."""
-    
+
+def pergunta_1(df_musica: pd.DataFrame):
+    """Gera um gráfico de dispersão entre a popularidade e a energia da música
+
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """    
     fig, graf = plt.subplots(figsize=(9,6))
     # Gráfico de dispersão entre a popularidade e a energia da música
     sns.scatterplot(data=df_musica, x=df_musica['Popularidade'], y=df_musica['Energia'], ax=graf)
@@ -206,7 +211,12 @@ def pergunta_1(df_musica):
     graf.get_figure().savefig(f"img/questoes_3/energia.png",bbox_inches="tight")
     plt.close(fig)
 
-def pergunta_2(df_musica): 
+def pergunta_2(df_musica: pd.DataFrame): 
+    """Gera um gráfico de dispersão entre a popularidade e o tempo da música
+
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """     
     fig, graf = plt.subplots(figsize=(9,6))
     # Gráfico de dispersão entre a popularidade e o tempo da música
     sns.scatterplot(data=df_musica, x=df_musica['Popularidade'], y=df_musica['Tempo'], ax=graf)
@@ -224,7 +234,12 @@ def pergunta_2(df_musica):
     graf.get_figure().savefig(f"img/questoes_3/tempo.png",bbox_inches="tight")
     plt.close(fig)
 
-def pergunta_3(df_musica): 
+def pergunta_3(df_musica: pd.DataFrame):
+    """Gera um gráfico de dispersão entre a popularidade e a dançabilidade da música
+
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """   
     fig, graf = plt.subplots(figsize=(9,6))
     #gráfico de dispersão entre a popularidade e a dançabilidade da música
     sns.scatterplot(data=df_musica, x=df_musica['Popularidade'], y=df_musica['Dançabilidade'], ax=graf)
