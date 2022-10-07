@@ -180,3 +180,78 @@ def grafico_plot(df: pd.DataFrame):
     graf.set_ylabel("Duração em milissegundos", fontdict={"fontsize":13})
     #salvar gráfico
     graf.get_figure().savefig(f"img/questao_1.6/plot.png",bbox_inches="tight")
+
+#gráficos das questão do grupo 3:
+
+"""O spotify disponibilza vários dados sobre as músicas, 
+    como a popularidade, energia da música, tempo, instrumentalidade, entre outros.
+    Portanto achamos interessante analisar esses dados e ver se conseguimos encontrar
+    Alguma relação entre eles e a popularidade da música."""
+
+def pergunta_1(df_musica: pd.DataFrame):
+    """Gera um gráfico de dispersão entre a popularidade e a energia da música
+
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """    
+    fig, graf = plt.subplots(figsize=(9,6))
+    # Gráfico de dispersão entre a popularidade e a energia da música
+    sns.scatterplot(data=df_musica, x=df_musica['Popularidade'], y=df_musica['Energia'], ax=graf)
+    plt.ticklabel_format(style="plain", axis="y")
+    # calculo do coeficiente de correlação entre popularidade e energia
+    correlacao = df_musica['Popularidade'].corr(df_musica['Energia'])
+    # anota o valor do coeficiente de correlação no gráfico
+    plt.text(60, 0.5,s=correlacao, horizontalalignment='left', size='medium', color='black', weight='semibold')
+    #adicionando título
+    graf.set_title("Popularidade x Energia", fontdict={"fontsize":15})
+    #eixos
+    graf.set_xlabel("Popularidade", fontdict={"fontsize":13})
+    graf.set_ylabel("Energia", fontdict={"fontsize":13})
+    #salvar gráfico
+    graf.get_figure().savefig(f"img/questoes_3/energia.png",bbox_inches="tight")
+    plt.close(fig)
+
+def pergunta_2(df_musica: pd.DataFrame): 
+    """Gera um gráfico de dispersão entre a popularidade e o tempo da música
+
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """     
+    fig, graf = plt.subplots(figsize=(9,6))
+    # Gráfico de dispersão entre a popularidade e o tempo da música
+    sns.scatterplot(data=df_musica, x=df_musica['Popularidade'], y=df_musica['Tempo'], ax=graf)
+    # calculo do coeficiente de correlação entre popularidade e tempo
+    correlacao = df_musica['Popularidade'].corr(df_musica['Tempo'])
+    #anota o valor do coeficiente de correlação no gráfico
+    plt.text(60, 200,s=correlacao, horizontalalignment='left', 
+             size='medium', color='black', weight='semibold')
+    #eixos
+    graf.set_xlabel("Popularidade", fontdict={"fontsize":13})
+    graf.set_ylabel("Tempo", fontdict={"fontsize":13})
+    #título
+    graf.set_title("Popularidade x Tempo", fontdict={"fontsize":15})
+    #salvar gráfico
+    graf.get_figure().savefig(f"img/questoes_3/tempo.png",bbox_inches="tight")
+    plt.close(fig)
+
+def pergunta_3(df_musica: pd.DataFrame):
+    """Gera um gráfico de dispersão entre a popularidade e a dançabilidade da música
+
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """   
+    fig, graf = plt.subplots(figsize=(9,6))
+    #gráfico de dispersão entre a popularidade e a dançabilidade da música
+    sns.scatterplot(data=df_musica, x=df_musica['Popularidade'], y=df_musica['Dançabilidade'], ax=graf)
+    #calcula o coeficiente de correlação entre popularidade e dançabilidade
+    correlacao = df_musica['Popularidade'].corr(df_musica['Dançabilidade'])
+    #anota o valor do coeficiente de correlação no gráfico
+    plt.text(60, 0.7,s=correlacao, horizontalalignment='left',
+             size='medium', color='black', weight='semibold')
+    #eixos
+    graf.set_xlabel("Popularidade", fontdict={"fontsize":13})
+    graf.set_ylabel("Dancabilidade", fontdict={"fontsize":13})
+    #título
+    graf.set_title("Popularidade x Dancabilidade", fontdict={"fontsize":15})
+    #salvar gráfico
+    graf.get_figure().savefig(f"img/questoes_3/dancabilidade.png",bbox_inches="tight")

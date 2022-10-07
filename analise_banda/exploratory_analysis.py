@@ -3,82 +3,6 @@ import numpy as np
 import re
 from wordcloud import STOPWORDS
 palavras_banidas = set(STOPWORDS)
-def separar_palavras_texto(texto: str) -> list[str]:
-    """recebe uma string e a separa em palavras
-
-    :param texto: string contendo o texto
-    :type texto: str
-    :return: retorna uma lista de palavras com todas as palavras com no minimo 3 letras contidas em texto
-    :rtype: list[str]
-    """
-     
-    palavras = re.findall('[\'\w]{3,}',texto, flags=re.IGNORECASE)
-    i=0
-    while i < len(palavras):
-        palavras[i] = palavras[i].lower()
-        if palavras[i] in palavras_banidas:
-            palavras.pop(i)
-        else:
-            i+=1
-    return palavras
-
-def separar_palavras_lista(lista_texto: list[str]) -> list[str] :    
-    """Recebe uma lista de strings, e as separa em palavras
-
-    :param lista_texto: lista de textos
-    :type lista_texto: list[str]
-    :return: lista de todas as palavras contidas nas lista de strings
-    :rtype: list[str]
-    """    
-    palavras = list()
-    for texto in lista_texto:
-        palavras.extend(separar_palavras_texto(texto))
-    return palavras
-
-def contar_palavras(lista_texto: list[str]) -> dict[str, int] :
-    """conta a frequencia de palavras dentro da lista
-
-    :param lista_texto: lista de textos
-    :type lista_texto: list[str]
-    :return: serie com as palavras e suas contagens 
-    :rtype: dict[str, int]
-    """    
-    palavras = pd.Series(separar_palavras_lista(lista_texto))
-    palavras = palavras.value_counts().to_dict()
-    return palavras
-
-def frequencia_titulo(titulo: str, texto: str) -> dict[str, int]:
-    """conta a frequencia de palavras do titulo dentro do texto
-
-    :param titulo: string com palavras a serem pesquisadsas no texto
-    :type titulo: str
-    :param texto: string onde as palavras do titulo vão ser pesquisadas
-    :type texto: str
-    :return: dicionario onde a chave são as palavras do título e os items são as
-    frequências
-    :rtype: dict[str, int]
-    """    
-    palavras_titulo = separar_palavras_texto(titulo)
-    frequencia = dict()
-    for palavra in palavras_titulo:
-        frequencia_palavra =  re.findall(
-            f'\W*({palavra})\W*', texto, flags= re.IGNORECASE)
-        frequencia[palavra] = len(frequencia_palavra)
-    return frequencia
-
-
-# musicas = pd.read_csv("dataset_acdc.csv", encoding= 'UTF-8')
-
-# musicas = musicas[['Álbum','Música','Letra']]
-
-# titulos = np.unique(musicas['Música'])
-# titulos = ' '.join(titulos)
-
-# print(separar_palavras_texto(titulos))
-
-
-df_musicas = pd.read_csv("dataset_acdc.csv")    
-df_albums = pd.read_csv("premiacoes.csv")
 
 ################
 #### ITEM 1 ####
@@ -238,3 +162,158 @@ def relacao_duracao_popularidade(df: pd.DataFrame) -> pd.DataFrame:
     except AttributeError:
         return ("Tipo incorreto de parâmetro")
     return corr_df
+
+#####################################################
+### Funções para auxiliar as respostas do grupo 2 ###
+#####################################################
+
+def separar_palavras_texto(texto: str) -> list[str]:
+    """recebe uma string e a separa em palavras
+
+    :param texto: string contendo o texto
+    :type texto: str
+    :return: retorna uma lista de palavras com todas as palavras com no minimo 3 letras contidas em texto
+    :rtype: list[str]
+    """
+
+    palavras = re.findall('[\'\w]{3,}',texto, flags=re.IGNORECASE)
+    i=0
+    while i < len(palavras):
+        palavras[i] = palavras[i].lower()
+        if palavras[i] in palavras_banidas:
+            palavras.pop(i)
+        else:
+            i+=1
+    return palavras
+
+def separar_palavras_lista(lista_texto: list[str]) -> list[str] :    
+    """Recebe uma lista de strings, e as separa em palavras
+
+    :param lista_texto: lista de textos
+    :type lista_texto: list[str]
+    :return: lista de todas as palavras contidas nas lista de strings
+    :rtype: list[str]
+    """    
+    palavras = list()
+    for texto in lista_texto:
+        palavras.extend(separar_palavras_texto(texto))
+    return palavras
+
+def contar_palavras(lista_texto: list[str]) -> dict[str, int] :
+    """conta a frequencia de palavras dentro da lista
+
+    :param lista_texto: lista de textos
+    :type lista_texto: list[str]
+    :return: serie com as palavras e suas contagens 
+    :rtype: dict[str, int]
+    """    
+    palavras = pd.Series(separar_palavras_lista(lista_texto))
+    palavras = palavras.value_counts().to_dict()
+    return palavras
+
+def frequencia_titulo(titulo: str, texto: str) -> dict[str, int]:
+    """conta a frequencia de palavras do titulo dentro do texto
+
+    :param titulo: string com palavras a serem pesquisadsas no texto
+    :type titulo: str
+    :param texto: string onde as palavras do titulo vão ser pesquisadas
+    :type texto: str
+    :return: dicionario onde a chave são as palavras do título e os items são as
+    frequências
+    :rtype: dict[str, int]
+    """    
+    palavras_titulo = separar_palavras_texto(titulo)
+    frequencia = dict()
+    for palavra in palavras_titulo:
+        frequencia_palavra =  re.findall(
+            f"\W*({palavra})\W*", texto, flags= re.IGNORECASE)
+        frequencia[palavra] = len(frequencia_palavra)
+    return frequencia
+
+############################
+### Grupo 2 de Perguntas ###
+############################
+
+def pergunta2_1(df_musicas)-> dict[str, int]:
+    """ Cria um dicionario com a frequência de cada palavra nos nomes dos álbuns do ACDC
+
+    :return: retorna um dicionario com a frequencia de cada palavra
+    :rtype: dict[str, int]
+    """    
+    musicas = df_musicas[["Álbum", "Música", "Letra"]]
+    musicas = musicas.set_index("Álbum")
+    nome_albuns = musicas.index.drop_duplicates()
+    dicionario_albuns = contar_palavras(nome_albuns)
+    return dicionario_albuns
+
+def pergunta2_2(df_musicas)-> dict[str, int]:
+    """ Cria um dicionario com a frequência de cada palavra no nome das músicas do ACDC
+
+    :return: retorna um dicionario com a frequencia de cada palavra
+    :rtype: dict[str, int]
+    """    
+    musicas = df_musicas[["Álbum", "Música", "Letra"]]
+    musicas = musicas.set_index("Álbum")
+    nome_musicas = musicas["Música"].drop_duplicates()
+    dicionario_musicas = contar_palavras(nome_musicas)
+    return dicionario_musicas
+
+def pergunta2_3(df_musicas)-> dict[str, dict[str, int]]:
+    """ Cria um dicionario com a frequencia de cada palavra em todas as letras
+    de um album
+
+    :return: retorna um dicionario com a frequencia de cada palavra categorizada por album
+    :rtype: dict[str, dict[str, int]]
+    """    
+    musicas = df_musicas[["Álbum", "Música", "Letra"]]
+    musicas = musicas.set_index("Álbum")
+    nome_albuns = np.unique(musicas.index)
+    frequencia_letras_album = {}
+    for album in nome_albuns:
+        musicas_album = musicas.loc[album]
+        letras_album = musicas_album["Letra"].drop_duplicates().dropna()
+        dicionario_letras = contar_palavras(letras_album)
+        frequencia_letras_album[album] = dicionario_letras
+    return frequencia_letras_album
+
+def pergunta2_4(df_musicas)-> dict[str, int]:
+    """ Cria um dicionario com a frequencia de cada palavra em todas as letras
+
+    :return: retorna um dicionario com a frequencia de cada palavra
+    :rtype: dict[str, int]
+    """    
+    musicas = df_musicas[["Álbum", "Música", "Letra"]]
+    musicas = musicas.set_index("Álbum")
+    letras = musicas["Letra"].drop_duplicates().dropna()
+    dicionario_frequencia_letras = contar_palavras(letras)
+    return dicionario_frequencia_letras
+
+def pergunta2_5(df_musicas)-> dict[str, int]:
+    """ Cria um dicionario com a frequencia em que as palavras do nome de todos os
+    albúns aparecem em todas as letras
+
+    :return: retorna um dicionario com a frequencia de cada palavra
+    :rtype: dict[str, int]
+    """    
+    musicas = df_musicas[["Álbum", "Música", "Letra"]]
+    musicas = musicas.set_index("Álbum")
+    nome_albuns = musicas.index.drop_duplicates()
+    letras = musicas["Letra"].drop_duplicates().dropna()
+    frequencia_album_letras= frequencia_titulo(" ".join(nome_albuns),
+                                                  " ".join(letras))
+    return frequencia_album_letras
+
+def pergunta2_6(df_musicas)-> dict[str, int]:
+    """ Cria um dicionario com a frequencia em que as palavras do nome de todas as
+    músicas aparecem em todas as letras
+
+    :return: retorna um dicionario com a frequencia de cada palavra
+    :rtype: dict[str, int]
+    """    
+    musicas = df_musicas[["Álbum", "Música", "Letra"]]
+    musicas = musicas.set_index("Álbum")
+    nome_musicas = musicas["Música"].drop_duplicates().dropna()
+    letras = musicas["Letra"].drop_duplicates().dropna()
+    frequencia_musica_letras= frequencia_titulo(" ".join(nome_musicas),
+                                                  " ".join(letras))
+    return frequencia_musica_letras
