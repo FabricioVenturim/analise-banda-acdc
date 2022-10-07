@@ -63,7 +63,8 @@ if __name__ == '__main__':
     musicas = pd.read_csv("dataset_acdc.csv", encoding= 'UTF-8')
     musicas = musicas[['Álbum','Música','Letra']]
     nome_musicas = np.unique(musicas['Música'])
-    cloud = cloud_acdc(ea.contar_palavras(nome_musicas), np.array(Image.open("acdc_logo2.png")),
+    letras = np.unique(musicas['Letra'])
+    cloud = cloud_acdc(ea.contar_palavras(letras), np.array(Image.open("acdc_logo2.png")),
                     'black', 5,'white',5, 80,
                     clareza_min_letras=40, clareza_max_letras= 50)
     plt.figure()
@@ -71,7 +72,6 @@ if __name__ == '__main__':
     plt.axis("off")
 
     plt.savefig(f"img/questao_2.4/tagcloud_letras.png",bbox_inches="tight")
-    letras = np.unique(musicas['Letra'])
     cloud = cloud_acdc(ea.frequencia_titulo(' '.join(nome_musicas),' '.join(letras)),
                     np.array(Image.open("logo_ACDC.png")))
     plt.figure()
