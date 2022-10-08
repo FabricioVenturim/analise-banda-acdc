@@ -443,7 +443,8 @@ def printar_primeira_questao_grupo_3(pdf: canvas.Canvas, df_musica: pd.DataFrame
     visualization.pergunta_1(df_musica)
     printar_msg(pdf, "Como a correlação é de -0,13, temos que não há correlação.")
     pdf.drawImage(f"img/questoes_3/energia.png", margem+50, 250, width=400, preserveAspectRatio=True, mask='auto')
-
+    pdf.setFont('VeraBd', 15)
+    pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
 
 
 def printar_segunda_questao_grupo_3(pdf: canvas.Canvas, df_musica: pd.DataFrame):
@@ -461,6 +462,8 @@ def printar_segunda_questao_grupo_3(pdf: canvas.Canvas, df_musica: pd.DataFrame)
     visualization.pergunta_2(df_musica)
     printar_msg(pdf, "Como a correlação é de 0,25, temos que não há correlação.")
     pdf.drawImage(f"img/questoes_3/Tempo.png", margem+50, 250, width=400, preserveAspectRatio=True, mask='auto')
+    pdf.setFont('VeraBd', 15)
+    pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
 
 def printar_terceira_questao_grupo_3(pdf: canvas.Canvas, df_musica: pd.DataFrame):
     """Função que escreve no pdf a pergunta 1 do grupo de perguntas 2
@@ -477,6 +480,33 @@ def printar_terceira_questao_grupo_3(pdf: canvas.Canvas, df_musica: pd.DataFrame
     visualization.pergunta_3(df_musica)
     printar_msg(pdf, "Como a correlação é de 0,11, temos que não há correlação.")
     pdf.drawImage(f"img/questoes_3/dancabilidade.png", margem+50, 250, width=400, preserveAspectRatio=True, mask='auto')
+    pdf.setFont('VeraBd', 15)
+    pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
+
+    
+def printar_modelo_questão(pdf: canvas.Canvas, enunciado: str, funcao, database: pd.DataFrame):
+    """Função responsável por gerar um modelo para escrever as questões no pdf
+    :param pdf: pdf a ser editado
+    :type pdf: canvas.Canvas
+    :param enunciado: questão a ser imprimida no pdf
+    :type enunciado: str
+    :param funcao: função responsável por imprimir determinada questão
+    :type funcao: function
+    :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset
+    :type df_musica: pd.DataFrame
+    """    
+    
+    global coluna
+    global linha
+    
+    linha = 750
+    pdf.setFont('VeraBd', 12)
+    printar_msg(pdf, enunciado)
+    pdf.setFont('Vera', 12)
+    linha-=15
+    funcao(pdf, database)
+    pdf.showPage()
+
 
 def gera_pdf(df_musica: pd.DataFrame, df_musica_premiacao: pd.DataFrame):
     """Função responsável por gerar o pdf com as perguntas respondidas
@@ -504,147 +534,59 @@ def gera_pdf(df_musica: pd.DataFrame, df_musica_premiacao: pd.DataFrame):
     pdf.drawString(250,780,"Grupo 1 de Perguntas")
     
     #Pergunta 1
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 1) Músicas mais ouvidas e músicas menos ouvidas por Álbum: ")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_primeira_questao_grupo_1(pdf, df_musica)
-    pdf.showPage()
+    printar_modelo_questão(pdf, "Pergunta 1) Músicas mais ouvidas e músicas menos ouvidas por Álbum: ", printar_primeira_questao_grupo_1, df_musica)
 
     #Pergunta 2
-    linha = 750
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 2) Músicas mais longas e músicas mais curtas por Álbum:")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_segunda_questao_grupo_1(pdf, df_musica)
-    pdf.showPage()
+    printar_modelo_questão(pdf, "Pergunta 2) Músicas mais longas e músicas mais curtas por Álbum:", printar_segunda_questao_grupo_1, df_musica)
 
     #Pergunta 3
-    linha = 750
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 3) Músicas mais ouvidas e músicas menos ouvidas")
-    printar_msg(pdf, "[em toda a história da banda ou artista]:")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_terceira_questao_grupo_1(pdf, df_musica)
-    pdf.showPage()
+    printar_modelo_questão(pdf, "Pergunta 3) Músicas mais ouvidas e músicas menos ouvidas da banda", printar_terceira_questao_grupo_1, df_musica)
 
     #Pergunta 4
-    linha = 750
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 4) Músicas mais longas e músicas mais curtas")
-    printar_msg(pdf, "[em toda a história da banda ou artista]:")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_quarta_questao_grupo_1(pdf, df_musica)
-    pdf.showPage()
+    printar_modelo_questão(pdf, "Pergunta 4) Músicas mais longas e músicas mais curtas da banda", printar_quarta_questao_grupo_1, df_musica)
 
     #Pergunta 5
-    linha = 750
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 5) Álbuns mais premiados:")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_quinta_questao_grupo_1(pdf, df_musica_premiacao)
-    pdf.showPage()
+    printar_modelo_questão(pdf, "Pergunta 5) Álbuns mais premiados:", printar_quinta_questao_grupo_1, df_musica_premiacao)
 
     #Pergunta 6
-    linha = 750
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 6) Álbuns mais premiados:")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_sexta_questao_grupo_1(pdf, df_musica)
-    pdf.showPage()
+    printar_modelo_questão(pdf, "Pergunta 6) Álbuns mais premiados:", printar_sexta_questao_grupo_1, df_musica)
 
     #Grupo 2 de perguntas
     pdf.setFont('VeraBd', 12)
     pdf.drawString(250,780,"Grupo 2 de Perguntas")
+    
     #Pergunta 1
-    linha = 750
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 1) Quais são as palavras mais comuns nos títulos dos Álbuns?")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_primeira_questao_grupo_2(pdf, df_musica)
-    pdf.showPage()
-
+    printar_modelo_questão(pdf, "Pergunta 1) Quais são as palavras mais comuns nos títulos dos Álbuns?", printar_primeira_questao_grupo_2, df_musica)
+    
     #Pergunta 2
-    linha = 750
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 2) Quais são as palavras mais comuns nos títulos das músicas?")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_segunda_questao_grupo_2(pdf, df_musica)
-    pdf.showPage()
+    printar_modelo_questão(pdf, "Pergunta 2) Quais são as palavras mais comuns nos títulos das músicas?", printar_segunda_questao_grupo_2, df_musica)
 
     #Pergunta 3
-    linha = 750
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 3) Quais são as palavras mais comuns, por Álbum?")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_terceira_questao_grupo_2(pdf, df_musica)
-    pdf.showPage()
+    printar_modelo_questão(pdf, "Pergunta 3) Quais são as palavras mais comuns, por Álbum?", printar_terceira_questao_grupo_2, df_musica)
 
     #Pergunta 4
-    linha = 750
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 4) Quais são as palavras mais comuns, em toda a discografia?")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_quarta_questao_grupo_2(pdf, df_musica)
-    pdf.showPage()
+    printar_modelo_questão(pdf, "Pergunta 4) Quais são as palavras mais comuns, em toda a discografia?", printar_quarta_questao_grupo_2, df_musica )
 
     #Pergunta 5
-    linha = 750
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 5) O título de um álbum é tema recorrente nas letras?")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_quinta_questao_grupo_2(pdf, df_musica)
-    pdf.showPage()
+    printar_modelo_questão(pdf, "Pergunta 5) O título de um álbum é tema recorrente nas letras?", printar_quinta_questao_grupo_2, df_musica)
 
     #Pergunta 6
-    linha = 750
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 6) O título de uma música é tema recorrente nas letras?")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_sexta_questao_grupo_2(pdf, df_musica)
-    pdf.showPage()
+    printar_modelo_questão(pdf, "Pergunta 6) O título de uma música é tema recorrente nas letras?", printar_sexta_questao_grupo_2, df_musica)
 
     #Grupo 3 de perguntas
     pdf.setFont('VeraBd', 12)
     pdf.drawString(250,780,"Grupo 3 de Perguntas")
+    
     #Pergunta 1
-    linha = 750
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 1) Há correlação entre Popularidade e a Energia das músicas?")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_primeira_questao_grupo_3(pdf, df_musica)
-    pdf.showPage()
+    printar_modelo_questão(pdf, "Pergunta 1) Há correlação entre Popularidade e a Energia das músicas?", printar_primeira_questao_grupo_3, df_musica)
 
-    #Pergunta 1
-    linha = 750
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 2) Há correlação entre Popularidade e a Dançabilidade das músicas?")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_primeira_questao_grupo_3(pdf, df_musica)
-    pdf.showPage()
 
-    #Pergunta 1
-    linha = 750
-    pdf.setFont('VeraBd', 12)
-    printar_msg(pdf, "Pergunta 3) Há correlação entre Popularidade e a Tempo das músicas?")
-    pdf.setFont('Vera', 12)
-    linha-=15
-    printar_primeira_questao_grupo_3(pdf, df_musica)
-    pdf.showPage()
+    #Pergunta 2
+    printar_modelo_questão(pdf, "Pergunta 2) Há correlação entre Popularidade e a Dançabilidade das músicas?", printar_segunda_questao_grupo_3, df_musica)
+   
 
+    #Pergunta 3
+    printar_modelo_questão(pdf, "Pergunta 3) Há correlação entre Popularidade e a Tempo das músicas?", printar_terceira_questao_grupo_3, df_musica)
 
     pdf.save()
 
