@@ -441,7 +441,7 @@ def printar_primeira_questao_grupo_3(pdf: canvas.Canvas, df_musica: pd.DataFrame
     global linha
 
     visualization.pergunta_1(df_musica)
-    printar_msg(pdf, "Como a correlação é de -0,13, temos que não há correlação.")
+    printar_msg(pdf, "Como a correlação é de -0,14, temos que não há correlação.")
     pdf.drawImage(f"img/questoes_3/energia.png", margem+50, 250, width=400, preserveAspectRatio=True, mask='auto')
     pdf.setFont('VeraBd', 15)
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
@@ -460,7 +460,7 @@ def printar_segunda_questao_grupo_3(pdf: canvas.Canvas, df_musica: pd.DataFrame)
     global linha
 
     visualization.pergunta_2(df_musica)
-    printar_msg(pdf, "Como a correlação é de 0,25, temos que não há correlação.")
+    printar_msg(pdf, "Como a correlação é de 0,11, temos que não há correlação.")
     pdf.drawImage(f"img/questoes_3/Tempo.png", margem+50, 250, width=400, preserveAspectRatio=True, mask='auto')
     pdf.setFont('VeraBd', 15)
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
@@ -478,7 +478,7 @@ def printar_terceira_questao_grupo_3(pdf: canvas.Canvas, df_musica: pd.DataFrame
     global linha
 
     visualization.pergunta_3(df_musica)
-    printar_msg(pdf, "Como a correlação é de 0,11, temos que não há correlação.")
+    printar_msg(pdf, "Como a correlação é de 0,25, temos que não há correlação.")
     pdf.drawImage(f"img/questoes_3/dancabilidade.png", margem+50, 250, width=400, preserveAspectRatio=True, mask='auto')
     pdf.setFont('VeraBd', 15)
     pdf.drawString(150,800,"Análise da Discografia da banda AC/DC")
@@ -582,11 +582,11 @@ def gera_pdf(df_musica: pd.DataFrame, df_musica_premiacao: pd.DataFrame):
 
 
     #Pergunta 2
-    printar_modelo_questão(pdf, "Pergunta 2) Há correlação entre Popularidade e a Dançabilidade das músicas?", printar_segunda_questao_grupo_3, df_musica)
+    printar_modelo_questão(pdf, "Pergunta 2) Há correlação entre Popularidade e a Tempo das músicas?", printar_segunda_questao_grupo_3, df_musica)
    
 
     #Pergunta 3
-    printar_modelo_questão(pdf, "Pergunta 3) Há correlação entre Popularidade e a Tempo das músicas?", printar_terceira_questao_grupo_3, df_musica)
+    printar_modelo_questão(pdf, "Pergunta 3) Há correlação entre Popularidade e a Dançabilidade das músicas?", printar_terceira_questao_grupo_3, df_musica)
 
     pdf.save()
 
