@@ -2,6 +2,7 @@
 
 ## Repositório de criação do banco de dados da discografia da banda AC/DC e análise exploratória e visualização dos dados.
 
+
 ### Como rodar?
 
 Passo 1: utilize o comando a seguir para instalar as bibliotecas necessárias para o funcionamento do programa: 
@@ -14,9 +15,10 @@ Passo 2: Para executar o programa, é necessário rodar o arquivo main.py da pas
 
 OBS: Certifique-se que os dois csv disponibilizados aqui estão na pasta da main.
 
-## Projeto:
+### Resultado Final: 
+[Analise_acdc.pdf](https://github.com/FabricioVenturim/analise-banda-acdc/files/9739991/Analise_acdc.pdf)
 
-O spotify disponibilza vários dados sobre as músicas, como a popularidade, energia da música, tempo, instrumentalidade, entre outros. Portanto achamos interessante analisar esses dados e ver se conseguimos encontrar alguma relação entre eles e a popularidade da música.
+## Projeto:
 
 ### interface:
 
@@ -36,7 +38,7 @@ Módulo responsável por criar o csv com as informações de cada música dos á
 Módulo responsável por responder as perguntas da etapa 2 do trabalho
 Mais informações sobre as perguntas: https://github.com/barrafas/Monitoria_LP/blob/main/Aulas%20.py/Trabalho%20A1.md
 
-*Grupo 3 de perguntas:
+* Grupo 3 de perguntas:
 
 O spotify disponibilza vários dados sobre as músicas, como a popularidade, energia da música, tempo, instrumentalidade, entre outros. Portanto achamos interessante analisar esses dados e ver se conseguimos encontrar alguma relação entre eles e a popularidade da música.
 
@@ -47,3 +49,15 @@ Módulo responsável por criar as visualizações. Para isso, foram utilizadas a
 ### cloud:
 
 Módulo responsável por criar os World Cloud.  Para isso, foram utilizadas as bibliotecas ```matplotlib```, ```tracemalloc``` e ```wordcloud```.
+
+## Documentação
+
+O link para toda documentação das funções dos métodos estão disponíveis em:
+
+https://fabricioventurim.github.io/analise-banda-acdc/
+
+## Colaboradores
+
+* [Erique Fernandes](https://github.com/EriqueFernandes)
+* [Fabrício Venturim](https://github.com/FabricioVenturim)
+* [Vinícius Antunes](https://github.com/FabricioVenturim/analise-banda-acdc/files/9739989/Analise_acdc.pdf)
