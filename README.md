@@ -16,7 +16,13 @@ Passo 2: Para executar o programa, é necessário rodar o arquivo main.py da pas
 OBS: Certifique-se que os dois csv disponibilizados aqui estão na pasta da main.
 
 ### Resultado Final: 
-[Analise_acdc.pdf](https://github.com/FabricioVenturim/analise-banda-acdc/files/9739991/Analise_acdc.pdf)
+
+[dataset_acdc.csv](https://github.com/FabricioVenturim/analise-banda-acdc/files/9740027/dataset_acdc.csv)
+
+[premiacoes.csv](https://github.com/FabricioVenturim/analise-banda-acdc/files/9740028/premiacoes.csv)
+
+[Analise_acdc.pdf](https://github.com/FabricioVenturim/analise-banda-acdc/files/9740026/Analise_acdc.pdf)
+
 
 ## Projeto:
 
