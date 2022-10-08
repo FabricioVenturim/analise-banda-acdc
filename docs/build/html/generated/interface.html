@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Índice" href="../genindex.html" /><link rel="search" title="Buscar" href="../search.html" />
+<link rel="index" title="Índice" href="../genindex.html" /><link rel="search" title="Buscar" href="../search.html" /><link rel="next" title="analise_banda.cloud" href="analise_banda.cloud.html" /><link rel="prev" title="API" href="../api.html" />
 
     <meta name="generator" content="sphinx-5.2.2, furo 2022.09.15"/>
         <title>interface - documentação Análise Banda AC/DC 1.0</title>
@@ -154,9 +154,11 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Como usar</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="../projeto.html">Projeto</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../api.html">API</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">interface</a></li>
 <li class="toctree-l2"><a class="reference internal" href="analise_banda.cloud.html">analise_banda.cloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="analise_banda.exploratory_analysis.html">analise_banda.exploratory_analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="analise_banda.create_dataset.html">analise_banda.create_dataset</a></li>
@@ -211,52 +213,55 @@
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">interface</span></code>(csv_musica, csv_premiacoes)</p></td>
 <td><p>Função que receberá dois csv e irá convertê-los em dois DataFrames para as demais funções</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_msg</span></code>(pdf, msg)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_modelo_questão</span></code>(pdf, enunciado, ...)</p></td>
+<td><p>Função responsável por gerar um modelo para escrever as questões no pdf :param pdf: pdf a ser editado :type pdf: canvas.Canvas :param enunciado: questão a ser imprimida no pdf :type enunciado: str :param funcao: função responsável por imprimir determinada questão :type funcao: function :param df_musica: DataFrame com as informações da banda AC/DC gerados no create_dataset :type df_musica: pd.DataFrame</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_msg</span></code>(pdf, msg)</p></td>
 <td><p>Função para escrever frases simples no pdf, atualizando o valor das linhas.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_primeira_questao_grupo_1</span></code>(pdf, df_musica)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_primeira_questao_grupo_1</span></code>(pdf, df_musica)</p></td>
 <td><p>Função que escreve no pdf as músicas mais famosas e menos famosas de cada álbum, bem como seus gráficos</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_primeira_questao_grupo_2</span></code>(pdf, df_musica)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_primeira_questao_grupo_2</span></code>(pdf, df_musica)</p></td>
 <td><p>Função que escreve no pdf a pergunta 1 do grupo de perguntas 2</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_primeira_questao_grupo_3</span></code>(pdf, df_musica)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_primeira_questao_grupo_3</span></code>(pdf, df_musica)</p></td>
 <td><p>Função que escreve no pdf a pergunta 1 do grupo de perguntas 2</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_quarta_questao_grupo_1</span></code>(pdf, df_musica)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_quarta_questao_grupo_1</span></code>(pdf, df_musica)</p></td>
 <td><p>Função que escreve no pdf as músicas mais longas e mais curtas de toda banda, bem como seus gráficos</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_quarta_questao_grupo_2</span></code>(pdf, df_musica)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_quarta_questao_grupo_2</span></code>(pdf, df_musica)</p></td>
 <td><p>Função que escreve no pdf a pergunta 1 do grupo de perguntas 2</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_quinta_questao_grupo_1</span></code>(pdf, ...)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_quinta_questao_grupo_1</span></code>(pdf, ...)</p></td>
 <td><p>Função que escreve no pdf os álbuns mais premiados da banda, bem como seus gráficos</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_quinta_questao_grupo_2</span></code>(pdf, df_musica)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_quinta_questao_grupo_2</span></code>(pdf, df_musica)</p></td>
 <td><p>Função que escreve no pdf a pergunta 1 do grupo de perguntas 2</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_segunda_questao_grupo_1</span></code>(pdf, df_musica)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_segunda_questao_grupo_1</span></code>(pdf, df_musica)</p></td>
 <td><p>Função que escreve no pdf as músicas mais famosas e menos famosas de cada álbum, bem como seus gráficos</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_segunda_questao_grupo_2</span></code>(pdf, df_musica)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_segunda_questao_grupo_2</span></code>(pdf, df_musica)</p></td>
 <td><p>Função que escreve no pdf a pergunta 2 do grupo de perguntas 2</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_segunda_questao_grupo_3</span></code>(pdf, df_musica)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_segunda_questao_grupo_3</span></code>(pdf, df_musica)</p></td>
 <td><p>Função que escreve no pdf a pergunta 1 do grupo de perguntas 2</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_sexta_questao_grupo_1</span></code>(pdf, df_musica)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_sexta_questao_grupo_1</span></code>(pdf, df_musica)</p></td>
 <td><p>Função que escreve no pdf a correlação entre as variáveis popularidade e duração das músicas da banda, bem como seus gráficos</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_sexta_questao_grupo_2</span></code>(pdf, df_musica)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_sexta_questao_grupo_2</span></code>(pdf, df_musica)</p></td>
 <td><p>Função que escreve no pdf a pergunta 1 do grupo de perguntas 2</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_terceira_questao_grupo_1</span></code>(pdf, df_musica)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_terceira_questao_grupo_1</span></code>(pdf, df_musica)</p></td>
 <td><p>Função que escreve no pdf as músicas mais famosas e menos famosas de toda banda, bem como seus gráficos</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_terceira_questao_grupo_2</span></code>(pdf, df_musica)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_terceira_questao_grupo_2</span></code>(pdf, df_musica)</p></td>
 <td><p>Função que escreve no pdf a pergunta 1 do grupo de perguntas 2</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_terceira_questao_grupo_3</span></code>(pdf, df_musica)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">printar_terceira_questao_grupo_3</span></code>(pdf, df_musica)</p></td>
 <td><p>Função que escreve no pdf a pergunta 1 do grupo de perguntas 2</p></td>
 </tr>
 </tbody>
@@ -269,8 +274,26 @@
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="analise_banda.cloud.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">analise_banda.cloud</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../api.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">API</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">

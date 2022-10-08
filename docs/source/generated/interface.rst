@@ -16,6 +16,7 @@
       fontes
       gera_pdf
       interface
+      printar_modelo_questão
       printar_msg
       printar_primeira_questao_grupo_1
       printar_primeira_questao_grupo_2
