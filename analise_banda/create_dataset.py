@@ -13,8 +13,8 @@ import pandas as pd
 spotify = sp.Spotify(client_credentials_manager=SpotifyClientCredentials("7e81a5d9c8cc48d8ad1891c5774dd6a6", "da0cee2b1eb74750b08a50ba2f54af1d"))
 
 def artist_albums(artist_id: str) -> dict:
-    """
-    Consulta a API do Spotify para todos os álbuns do artista escolhido
+    """Consulta a API do Spotify para todos os álbuns do artista escolhido
+    
     :param artist_id: ID de artistas da API do Spotify
     :type artist_id: str
     :return: retorna um dicionário com informações de todos os álbuns de um artista
@@ -31,8 +31,8 @@ def artist_albums(artist_id: str) -> dict:
 
 
 def artist_musics(artist_id: str) -> pd.DataFrame:
-    """
-    Cria um data frame com informaçoes sobre todas as músicas do artista
+    """Cria um data frame com informaçoes sobre todas as músicas do artista
+    
     :param artist_id: id do artista na API do Spotify
     :type artist_id: str
     :return: retorna um DataFrame com vários álbums, cada album com várias músicas
@@ -97,8 +97,8 @@ def artist_musics(artist_id: str) -> pd.DataFrame:
                                 ###################################
 
 def get_links(band: str) -> dict:
-    """
-    Cria um dataframe com as letras e exibições do site Letras.com.br
+    """Cria um dataframe com as letras e exibições do site Letras.com.br
+    
     :param band: nome da banda que se deseja o dataframe
     :type band: str
     :return: dicionário com os nomes das músicas, letras e exibições
@@ -128,8 +128,9 @@ def get_links(band: str) -> dict:
 
 
 def get_music(new_page: str) -> str:
-    """
-    Função para pegar as letras das músicas do site letras
+
+    """Função para pegar as letras das músicas do site letras
+    
     :param new_page: link do site da letra que se deseja pegar a letra
     :type new_page: str
     :return: string com a letra da música
@@ -148,8 +149,8 @@ def get_music(new_page: str) -> str:
         print(f"Ocorreu algum erro ao tentar acessar o site da música. {erro}")
 
 def get_popularity(new_page: str) -> int:
-    """
-    Função para pegar as exibições da música do site letra
+    """Função para pegar as exibições da música do site letra
+    
     :param new_page: link da música que se deseja pegar as exibições
     :type new_page: str
     :return: número de exibições que aquela música teve no site letras
@@ -166,8 +167,8 @@ def get_popularity(new_page: str) -> int:
         print(f"Ocorreu algum erro ao tentar acessar o site da música. {erro}") 
 
 def create_dataset_letras(band: str) -> pd.DataFrame:
-    """
-    Função responsável por criar um dataframe com os nomes das músicas, letras e exibições do site letras.com.br. 
+    """Função responsável por criar um dataframe com os nomes das músicas, letras e exibições do site letras.com.br. 
+    
     :param band: nome da banda que se deseja ter um dataframe
     :type band: str
     :return: dataframe com os nomes das músicas, letras e exibições 
@@ -185,6 +186,7 @@ def create_dataset_letras(band: str) -> pd.DataFrame:
 
 def join_dataset(spotify: str, nome_letras: str):
     """Função para juntar o dataframe da API do spotify e o dataframe do scraping do site letras.com.br
+    
     :param spotify: ID de artistas da API do Spotify
     :type spotify: str
     :param nome_letras: nome da banda que se deseja o dataframe
