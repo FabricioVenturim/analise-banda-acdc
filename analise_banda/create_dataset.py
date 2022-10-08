@@ -1,3 +1,6 @@
+"""
+Módulo responsável por criar o csv com as informações de cada música dos álbuns da banda
+"""
 import spotipy as sp
 from spotipy.oauth2 import SpotifyClientCredentials
 from urllib.request import urlopen
