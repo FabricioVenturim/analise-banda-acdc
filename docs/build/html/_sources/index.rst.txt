@@ -5,16 +5,12 @@
 
 Análise Banda AC/DC
 ===============================================
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
+Repositório de criação do banco de dados da discografia da banda AC/DC e análise exploratória e visualização dos dados.
 
 Conteúdo
 --------
 .. toctree::
-
    usage
+   projeto
    api
 

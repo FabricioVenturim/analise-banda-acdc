@@ -2,10 +2,12 @@
 <html class="no-js" lang="pt-BR">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Índice" href="genindex.html" /><link rel="search" title="Buscar" href="search.html" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Índice" href="genindex.html" /><link rel="search" title="Buscar" href="search.html" /><link rel="next" title="API" href="api.html" /><link rel="prev" title="Como usar" href="usage.html" />
 
-    <meta name="generator" content="sphinx-5.2.2, furo 2022.09.15"/><title>Índice de Módulos Python - documentação Análise Banda AC/DC 1.0</title>
-<link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <meta name="generator" content="sphinx-5.2.2, furo 2022.09.15"/>
+        <title>Projeto - documentação Análise Banda AC/DC 1.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=9ec31e2665bf879c1d47d93a8ec4893870ee1e45" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -132,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -152,9 +154,9 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Como usar</a></li>
-<li class="toctree-l1"><a class="reference internal" href="projeto.html">Projeto</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Projeto</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated/interface.html">interface</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/analise_banda.cloud.html">analise_banda.cloud</a></li>
@@ -190,76 +192,77 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          
-<section class="domainindex-section">
-  <h1>Índice de Módulos Python</h1>
-  <div class="domainindex-jumpbox"><a href="#cap-a"><strong>a</strong></a> | <a href="#cap-i"><strong>i</strong></a></div>
+          <section id="projeto">
+<h1>Projeto<a class="headerlink" href="#projeto" title="Link permanente para este cabeçalho">#</a></h1>
+<section id="interface">
+<h2>interface<a class="headerlink" href="#interface" title="Link permanente para este cabeçalho">#</a></h2>
+<p>Responsável por gerar o pdf com as respostas das perguntas e a estrutura do
+programa utilizando a biblioteca <code class="docutils literal notranslate"><span class="pre">reportlab</span></code>. Para isso, são necessários dois csv:</p>
+<ul class="simple">
+<li><p>Csv com as informações de cada música dos álbuns da banda.</p></li>
+<li><p>Csv com as premiações dos álbuns da banda.</p></li>
+</ul>
+<p>Ao rodar a interface, ela chamará os módulos do pacote <code class="docutils literal notranslate"><span class="pre">analise_banda</span></code> e produzirá o pdf no mesmo diretório.</p>
 </section>
-<table class="domainindex-table">
-  <tr class="pcap">
-    <td></td><td>&#160;</td><td></td>
-  </tr>
-  <tr class="cap" id="cap-a">
-    <td></td><td><strong>a</strong></td><td></td>
-  </tr>
-  <tr>
-    <td><img src="_static/minus.png" class="toggler"
-              id="toggle-1" style="display: none" alt="-" /></td>
-    <td>
-        <code class="xref">analise_banda</code></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="cg-1">
-    <td></td>
-    <td>&#160;&#160;&#160;
-        <a href="generated/analise_banda.cloud.html#module-analise_banda.cloud"><code class="xref">analise_banda.cloud</code></a></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="cg-1">
-    <td></td>
-    <td>&#160;&#160;&#160;
-        <a href="generated/analise_banda.create_dataset.html#module-analise_banda.create_dataset"><code class="xref">analise_banda.create_dataset</code></a></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="cg-1">
-    <td></td>
-    <td>&#160;&#160;&#160;
-        <a href="generated/analise_banda.exploratory_analysis.html#module-analise_banda.exploratory_analysis"><code class="xref">analise_banda.exploratory_analysis</code></a></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="cg-1">
-    <td></td>
-    <td>&#160;&#160;&#160;
-        <a href="generated/analise_banda.visualization.html#module-analise_banda.visualization"><code class="xref">analise_banda.visualization</code></a></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="pcap">
-    <td></td><td>&#160;</td><td></td>
-  </tr>
-  <tr class="cap" id="cap-i">
-    <td></td><td><strong>i</strong></td><td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>
-        <a href="generated/interface.html#module-interface"><code class="xref">interface</code></a></td><td>
-    <em></em></td>
-  </tr>
-</table>
+<section id="create-dataset">
+<h2>create_dataset<a class="headerlink" href="#create-dataset" title="Link permanente para este cabeçalho">#</a></h2>
+<p>Módulo responsável por criar o csv com as informações de cada música dos álbuns
+da banda. Para isso, ela utiliza a biblioteca <code class="docutils literal notranslate"><span class="pre">spotipy</span></code> e a biblioteca <code class="docutils literal notranslate"><span class="pre">beautifulsoup</span></code>
+para fazer o scraping do site <cite>letras.com.br</cite>.</p>
+</section>
+<section id="exploratory-analysis">
+<h2>exploratory_analysis<a class="headerlink" href="#exploratory-analysis" title="Link permanente para este cabeçalho">#</a></h2>
+<p>Módulo responsável por responder as perguntas da etapa 2 do trabalho.
+Mais informações sobre as perguntas: <cite>https://github.com/barrafas/Monitoria_LP/blob/main/Aulas%20.py/Trabalho%20A1.md</cite></p>
+<p><strong>Grupo 3 de perguntas:</strong>
+O spotify disponibilza vários dados sobre as músicas, como a popularidade,
+energia da música, tempo, instrumentalidade, entre outros. Portanto achamos
+interessante analisar esses dados e ver se conseguimos encontrar alguma relação
+entre eles e a popularidade da música.</p>
+</section>
+<section id="visualization">
+<h2>visualization<a class="headerlink" href="#visualization" title="Link permanente para este cabeçalho">#</a></h2>
+<p>Módulo responsável por criar as visualizações.
+Para isso, foram utilizadas as bibliotecas <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> e <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p>
+</section>
+<section id="cloud">
+<h2>cloud<a class="headerlink" href="#cloud" title="Link permanente para este cabeçalho">#</a></h2>
+<p>Módulo responsável por criar os World Cloud. Para isso,
+foram utilizadas as bibliotecas <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, <code class="docutils literal notranslate"><span class="pre">tracemalloc</span></code> e <code class="docutils literal notranslate"><span class="pre">wordcloud</span></code>.</p>
+</section>
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="api.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">API</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="usage.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Como usar</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -280,8 +283,31 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Projeto</a><ul>
+<li><a class="reference internal" href="#interface">interface</a></li>
+<li><a class="reference internal" href="#create-dataset">create_dataset</a></li>
+<li><a class="reference internal" href="#exploratory-analysis">exploratory_analysis</a></li>
+<li><a class="reference internal" href="#visualization">visualization</a></li>
+<li><a class="reference internal" href="#cloud">cloud</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
