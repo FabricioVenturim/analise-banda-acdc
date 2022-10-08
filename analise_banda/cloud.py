@@ -1,3 +1,5 @@
+"""módulo responsável por criar as tagclouds do grupo de perguntas 2
+"""
 from tracemalloc import stop
 import pandas as pd
 import numpy as np
