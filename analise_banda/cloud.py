@@ -64,7 +64,7 @@ def cloud_1(df_musicas: pd.DataFrame):
     musicas = df_musicas[['Álbum','Música','Letra']]
     nome_musicas = np.unique(musicas['Música'])
     cloud = cloud_acdc(exploratory_analysis.contar_palavras(nome_musicas),
-                    np.array(Image.open("acdc_logo2.png")),'white', 5,'gold',
+                    np.array(Image.open("img/acdc_logo2.png")),'white', 5,'gold',
                     5, 80,clareza_min_letras=40, clareza_max_letras= 50)
     plt.figure()
     plt.imshow(cloud)
@@ -80,7 +80,7 @@ def cloud_2(df_musicas: pd.DataFrame):
     """    
     musicas = df_musicas[['Álbum','Música','Letra']]
     letras = np.unique(musicas['Letra'])
-    cloud = cloud_acdc(exploratory_analysis.contar_palavras(letras), np.array(Image.open("acdc_logo2.png")),
+    cloud = cloud_acdc(exploratory_analysis.contar_palavras(letras), np.array(Image.open("img/acdc_logo2.png")),
                     'black', 5,'white',5, 80,
                     clareza_min_letras=40, clareza_max_letras= 50)
     plt.figure()
@@ -100,7 +100,7 @@ def cloud_3(df_musicas: pd.DataFrame):
     letras = np.unique(musicas['Letra'])
     nome_musicas = np.unique(musicas['Música'])
     cloud = cloud_acdc(exploratory_analysis.frequencia_titulo(' '.join(nome_musicas),' '.join(letras)),
-                    np.array(Image.open("logo_ACDC.png")))
+                    np.array(Image.open("img/logo_ACDC.png")))
     plt.figure()
     plt.imshow(cloud)
     plt.axis("off")

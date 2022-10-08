@@ -226,5 +226,5 @@ def join_dataset(spotify: str, nome_letras: str):
 
 
 #PARA ATUALIZAR O CSV
-if __name__ == '__main__':
+if __name__ == "__main__":
     join_dataset("spotify:artist:711MCceyCBcFnzjGY4Q7Un","ac-dc")
